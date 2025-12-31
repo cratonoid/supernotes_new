@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Planning Made Easy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            height: 25px;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .get-in-touch {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-left: 1.5rem;
+            margin-right: 1.5rem;
+            position: relative;
+            padding: 30px 80px;
+            min-height: 640px;
+            background-image: url('images/banner-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 60px;
+        }
+
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-left-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hero-left-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .cta-btn {
+            margin-left: -7rem;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-arrow {
+            height: 23px;
+            width: auto;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+
+        .hero-right-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        .hero-right-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+
+        
+        /* Star Runner Section */
+        .star-runner {
+            background: white;
+            padding: 36px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .star-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        .star-track img {
+            height: 27px;
+            margin: 0 7px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+
+        /* 4-1 Tool Kit Section */
+.toolkit-section {
+    padding: 7px 80px;
+    background: #F2F6FF;
+}
+
+.toolkit-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.toolkit-badge {
+    display: inline-block;
+
+}
+
+.toolkit-badge img {
+    height: 70px;
+}
+
+.toolkit-title {
+    margin-top: -1.5rem;
+    font-size: 42px;
+}
+
+.toolkit-title .orange-text {
+    color: #ff6b35;
+    font-style: italic;
+}
+
+.toolkit-subtitle {
+    color: #666;
+    font-size: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.toolkit-content {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.toolkit-video {
+    flex: 1;
+    max-width: 450px;
+}
+
+.video-container {
+    position: relative;
+    background: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    padding-bottom: 75%; /* 4:3 aspect ratio */
+}
+
+.video-container iframe,
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(128, 128, 128, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.play-button::after {
+    content: '▶';
+    color: white;
+    font-size: 30px;
+    margin-left: 5px;
+}
+
+.toolkit-features {
+    flex: 1;
+}
+
+.toolkit-item {
+    padding: 30px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.toolkit-item:last-child {
+    border-bottom: none;
+}
+
+.toolkit-item-title {
+    font-size: 28px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.toolkit-arrow {
+    height: 20px;
+    width: auto;
+}
+
+.toolkit-item-description {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.toolkit-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+    .toolkit-content {
+        flex-direction: column;
+    }
+    
+    .toolkit-video {
+        max-width: 100%;
+    }
+}
+        /* Why Section */
+        .why-section {
+            padding: 80px 80px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+        }
+
+        .section-title .highlight {
+            color: #ff6b35;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Explore Digital Section */
+        .explore-section {
+            padding: 80px 80px;
+            background: #ffffff;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .resource-image {
+            width: 100%;
+            height: 150px;
+            background: #ddd;
+        }
+
+        .resource-content {
+            padding: 20px;
+        }
+
+        .resource-tag {
+            background: #ffe5d9;
+            color: #ff6b35;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .resource-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* Articles Section */
+        .articles-section {
+            padding: 80px 80px;
+            background: white;
+        }
+
+        .articles-container {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .articles-image {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .articles-image img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .articles-content {
+            flex: 1;
+        }
+
+        .articles-list {
+            margin-top: 30px;
+        }
+
+        .article-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .article-icon {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px 80px;
+            background: #f8f9fa;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 80px;
+            background: white;
+            text-align: center;
+        }
+
+        .cta-boxes {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .cta-box {
+            background: #f8f9fa;
+            padding: 60px 40px;
+            border-radius: 20px;
+            min-width: 250px;
+        }
+
+        .cta-box-icon {
+            width: 60px;
+            height: 60px;
+            background: #d4edda;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 40px 80px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-container {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+
+            .hero-left-image,
+            .hero-right-image {
+                max-width: 300px;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="udayni logo">
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#courses">Courses</a>
+            <a href="#services">Services</a>
+            <button class="get-in-touch">Get in touch</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-left">
+                <div class="hero-left-image">
+                    <img src="images/mb1.png" alt="Hero Left">
+                </div>
+                <button class="cta-btn">
+                    Get Supernotes Complimentary 
+                    <img src="images/arrow.png" alt="arrow" class="btn-arrow">
+                </button>
+            </div>
+            
+            <div class="hero-right">
+                <div class="hero-right-image">
+                    <img src="images/mb2.png" alt="Hero Right">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Star Runner Section -->
+    <section class="star-runner">
+        <div class="star-track">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <!-- Duplicate for seamless loop -->
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+            <img src="images/supernotes-star.png" alt="Star">
+        </div>
+    </section>
+
+
+
+
+    <!-- 4-1 Tool Kit Section -->
+    <section class="toolkit-section">
+        <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="images/discount.png">
+            </div>
+            <h2 class="toolkit-title">
+                Why do we call it 4-1 one<br>
+                tool kit - <span class="orange-text">Whats included</span>
+            </h2>
+            <p class="toolkit-subtitle">
+                This book transforms even the toughest topics into quick, digestible Super Notes designed to 
+                improve memory retention, exam performance, and self-learning confidence.
+            </p>
+        </div>
+
+        <div class="toolkit-content">
+            <!-- Video Section -->
+            <div class="toolkit-video">
+                <div class="video-container">
+                    <!-- Replace with your actual video -->
+                    <video src="images/toolkit-video.mp4" poster="images/video-thumbnail.jpg"></video>
+                    <div class="play-button"></div>
+                </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="toolkit-features">
+                <div class="toolkit-item">
+                    <h3 class="toolkit-item-title">
+                        160 Pages Notebook
+                        <img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow">
+                    </h3>
+                    <p class="toolkit-item-description">
+                        Swap out any regular class notebook with Supernotes, so your child gets introduced to 
+                        career planning essentials and explores career options across various fields while taking notes.
+                    </p>
+                </div>
+
+                <div class="toolkit-item">
+                    <h3 class="toolkit-item-title">
+                        Gain Insights E-Book
+                    </h3>
+                    <p class="toolkit-item-description">
+                        Access comprehensive career insights and guidance to help make informed decisions about 
+                        your future career path.
+                    </p>
+                </div>
+
+                <div class="toolkit-item">
+                    <h3 class="toolkit-item-title">
+                        Connect with a Mentor
+                    </h3>
+                    <p class="toolkit-item-description">
+                        Get personalized guidance from experienced professionals who can help navigate your 
+                        career journey.
+                    </p>
+                </div>
+
+                <div class="toolkit-item">
+                    <h3 class="toolkit-item-title">
+                        Access to Resources
+                    </h3>
+                    <p class="toolkit-item-description">
+                        Unlimited access to career planning tools, materials, and resources to support your 
+                        career development.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="toolkit-cta">
+            <button class="cta-btn">
+                Get Supernotes Complimentary
+                <img src="images/arrow.png" alt="arrow" class="btn-arrow">
+            </button>
+        </div>
+    </section>
+
+
+
+
+
+   
+
+    <!-- Explore Digital Section -->
+    <section class="explore-section">
+        <h2 class="section-title">Explore digital <span class="highlight">content</span></h2>
+        
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-image"></div>
+                <div class="resource-content">
+                    <span class="resource-tag">Webinar</span>
+                    <h3 class="resource-title">Career Planning Workshop</h3>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-image"></div>
+                <div class="resource-content">
+                    <span class="resource-tag">Article</span>
+                    <h3 class="resource-title">Industry Insights</h3>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-image"></div>
+                <div class="resource-content">
+                    <span class="resource-tag">Video</span>
+                    <h3 class="resource-title">Success Stories</h3>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-image"></div>
+                <div class="resource-content">
+                    <span class="resource-tag">Guide</span>
+                    <h3 class="resource-title">Career Roadmap</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section class="articles-section">
+        <div class="articles-container">
+            <div class="articles-image">
+                <img src="https://via.placeholder.com/400x500" alt="Student">
+            </div>
+            
+            <div class="articles-content">
+                <h2>Our <span class="highlight">Articles</span></h2>
+                <p>Discover insights and guidance for your career journey</p>
+                
+                <div class="articles-list">
+                    <div class="article-item">
+                        <div class="article-icon"></div>
+                        <div>
+                            <h4>Flexible Curriculum</h4>
+                            <p>Learn at your own pace with our adaptable content</p>
+                        </div>
+                    </div>
+                    
+                    <div class="article-item">
+                        <div class="article-icon"></div>
+                        <div>
+                            <h4>Expert Mentorship</h4>
+                            <p>Connect with industry professionals</p>
+                        </div>
+                    </div>
+                    
+                    <div class="article-item">
+                        <div class="article-icon"></div>
+                        <div>
+                            <h4>Personalized Support</h4>
+                            <p>Get guidance tailored to your goals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Choosing Section -->
+    <section class="explore-section">
+        <h2 class="section-title">Choosing the wrong <span class="highlight">career?</span></h2>
+        <div class="articles-list" style="max-width: 600px; margin: 0 auto;">
+            <div class="article-item">
+                <div class="article-icon"></div>
+                <div>
+                    <h4>Flexible Curriculum</h4>
+                    <p>Explore different paths before committing</p>
+                </div>
+            </div>
+            
+            <div class="article-item">
+                <div class="article-icon"></div>
+                <div>
+                    <h4>Expert Mentorship Program</h4>
+                    <p>Get guidance from those who've been there</p>
+                </div>
+            </div>
+            
+            <div class="article-item">
+                <div class="article-icon"></div>
+                <div>
+                    <h4>Personalized Support</h4>
+                    <p>Career counseling tailored to you</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <h2 class="section-title">What parents say about <span class="highlight">udayni</span></h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Udayni has been instrumental in helping my daughter find her career path. The mentorship program is excellent!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <strong>Sunita Rao</strong>
+                        <div style="font-size: 12px; color: #666;">Parent</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"The resources available are comprehensive and really helped my son make informed decisions about his future."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <strong>Rakesh</strong>
+                        <div style="font-size: 12px; color: #666;">Parent</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"A wonderful platform that truly understands the needs of students and provides practical guidance."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div>
+                        <strong>Meenakshi</strong>
+                        <div style="font-size: 12px; color: #666;">Parent</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="section-title">Get in <span class="highlight">touch</span></h2>
+        
+        <div class="cta-boxes">
+            <div class="cta-box">
+                <div class="cta-box-icon"></div>
+                <h3>For Students</h3>
+                <button class="cta-btn">Get Started</button>
+            </div>
+            
+            <div class="cta-box">
+                <div class="cta-box-icon"></div>
+                <h3>For Mentors</h3>
+                <button class="cta-btn">Join Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <p>&copy; 2024 udayni. All rights reserved.</p>
+    </footer>
+</body>
+</html>
