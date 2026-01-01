@@ -6,8 +6,7 @@
     <title>Career Planning Made Easy</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
+        
             box-sizing: border-box;
         }
 
@@ -28,6 +27,7 @@
         }
 
         .logo {
+            margin-left: 7rem;
             height: 25px;
         }
 
@@ -37,6 +37,7 @@
         }
 
         nav {
+            margin-right: 5 rem;
             display: flex;
             gap: 40px;
             align-items: center;
@@ -113,7 +114,7 @@
         }
 
         .cta-btn {
-            margin-left: -7rem;
+            /* margin-left: -7rem; */
             background: #ff6b35;
             color: white;
             border: none;
@@ -194,7 +195,7 @@
 
 .toolkit-header {
     text-align: center;
-    margin-bottom: 60px;
+
 }
 
 .toolkit-badge {
@@ -207,6 +208,7 @@
 }
 
 .toolkit-title {
+    margin-bottom: 0.2rem;
     margin-top: -1.5rem;
     font-size: 42px;
 }
@@ -223,29 +225,33 @@
     margin: 0 auto;
 }
 
-.toolkit-content {
+        .toolkit-content {
+
     display: flex;
-    gap: 80px;
-    align-items: center;
+    gap: 60px;
+    align-items: center; /* vertically center the video */
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.toolkit-video {
-    flex: 1;
-    max-width: 450px;
+        .toolkit-video {
+    flex: 1.2;
+    max-width: 720px;
+    position: sticky; /* keep video visually stable when right column height changes */
+    top: 120px;
+    align-self: flex-center;
 }
 
-.video-container {
+        .video-container {
     position: relative;
-    background: #e0e0e0;
+    background: #eaeef6;
     border-radius: 20px;
     overflow: hidden;
-    padding-bottom: 75%; /* 4:3 aspect ratio */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
 }
 
-.video-container iframe,
-.video-container video {
+        .video-container iframe,
+        .video-container video {
     position: absolute;
     top: 0;
     left: 0;
@@ -275,39 +281,104 @@
     margin-left: 5px;
 }
 
-.toolkit-features {
+
+
+        .toolkit-features {
     flex: 1;
+    max-width: 520px;
 }
 
-.toolkit-item {
-    padding: 30px 0;
-    border-bottom: 1px solid #ddd;
+        .toolkit-item {
+    padding: 10px 0;
+    position: relative;
 }
 
-.toolkit-item:last-child {
-    border-bottom: none;
+        .toolkit-item::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: #d8dbe6;
+    width: 80%;
+    margin-top: 28px;
+    opacity: 0.9;
 }
 
-.toolkit-item-title {
-    font-size: 28px;
-    margin-bottom: 15px;
+        .toolkit-item-title {
+    font-size: 2.2rem; /* smaller title size per request */
+    margin-bottom: 0;
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between; /* keep text left, arrow right */
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 6px 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    color: #0f1720;
 }
 
-.toolkit-arrow {
-    height: 20px;
+        .toolkit-arrow-wrap{display:flex; justify-content:flex-end;}
+        .toolkit-arrow {
+    height: 5rem;
     width: auto;
+    transition: none; /* keep arrow static */
 }
 
-.toolkit-item-description {
+        .toolkit-body {
+            margin-right: 8rem;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
     color: #666;
     font-size: 15px;
     line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0;
+}
+
+        .toolkit-item-description {
+    flex: 1 1 auto;
+}
+
+        .toolkit-item.active .toolkit-body {
+            margin-right: 8rem;
+    max-height: 400px;
+    padding-top: 15px;
+}
+
+        /* no rotation: arrow stays static when expanded */
+
+        /* video play overlay */
+        .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+}
+
+        .play-button::after {
+    content: '▶';
+    color: white;
+    font-size: 36px;
+    margin-left: 5px;
 }
 
 .toolkit-cta {
+    margin-bottom: 2rem;
     text-align: center;
     margin-top: 50px;
 }
@@ -319,6 +390,7 @@
     
     .toolkit-video {
         max-width: 100%;
+        position: static; /* disable sticky on small screens */
     }
 }
         /* Why Section */
@@ -371,7 +443,7 @@
 
         /* Explore Digital Section */
         .explore-section {
-            padding: 80px 80px;
+            padding: 40px 170px;
             background: #ffffff;
         }
 
@@ -380,23 +452,60 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             margin-top: 40px;
+            grid-auto-rows: 1fr; /* make each card row equal height so CTAs align */
         }
 
         .resource-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 24px rgba(15,23,42,0.08);
+            display: flex;
+            flex-direction: column;
         }
 
         .resource-image {
             width: 100%;
-            height: 150px;
-            background: #ddd;
+            height: 180px;
+            object-fit: cover;
+            display: block;
         }
 
         .resource-content {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+
+        .resource-desc { 
+            margin-bottom: 1rem;
+            color: #666; font-size: 14px; }
+
+        .resource-btn {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: auto; /* push to bottom of card so buttons align */
+            transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+            cursor: pointer;
+        }
+
+        .resource-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(15,23,42,0.12);
+            background-color: #ff7b4a;
+        }
+
+        .resource-btn:focus {
+            outline: 3px solid rgba(255,107,53,0.16);
+            outline-offset: 4px;
+            box-shadow: 0 12px 24px rgba(15,23,42,0.12);
         }
 
         .resource-tag {
@@ -411,7 +520,148 @@
 
         .resource-title {
             font-size: 16px;
-            margin-bottom: 10px;
+            /* margin-bottom: 10px; */
+        }
+
+        /* Choosing Section Styles */
+        .choosing-section {
+            padding: 20px 125px;
+            background: white;
+        }
+
+        .choosing-container {
+            display: flex;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            align-items: center;
+        }
+
+        .choosing-left {
+            flex: 1;
+        }
+
+        .choosing-image {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 20px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(15,23,42,0.08);
+        }
+
+        .choosing-right {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .choosing-list { display:flex; flex-direction: column; gap: 20px; }
+
+        .choosing-item {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            background: transparent;
+        }
+
+        .choosing-icon {
+            width: 62px;
+            height: 62px;
+            /* background: white; */
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .choosing-icon img { 
+            width: auto; height: 10rem; }
+
+        .choosing-text h4 { margin: 0 0 6px 0; font-size: 18px; }
+        .choosing-text p { margin: 0; color: #666; font-size: 14px; }
+
+        @media (max-width: 992px) {
+            .choosing-container { flex-direction: column; align-items: center; }
+            .choosing-right { padding-left: 0; }
+            .choosing-image { max-width: 100%; }
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 20px 100px;
+            background: white;
+        }
+
+        .services-container {
+            margin-top: 40px;
+            background-image: url('images/sb.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            padding: 48px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-list {
+            flex: 1 1 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .service-item {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            /* background: white; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+              flex-shrink: 0;
+        }
+
+        .service-text h4 {
+            margin: 0 0 6px 0;
+            font-size: 16px;
+        }
+
+        .service-text p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .service-center {
+            flex: 0 0 420px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .service-center img {
+            width: 420px;
+            max-width: 100%;
+            border-radius: 20px;        
+        }
+
+        .services-cta {
+            text-align: center;
+            margin-top: 34px;
+        }
+
+        @media (max-width: 992px) {
+            .services-container { flex-direction: column; padding: 28px; }
+            .service-center { order: 2; }
         }
 
         /* Articles Section */
@@ -460,48 +710,53 @@
             flex-shrink: 0;
         }
 
-        /* Testimonials */
+        /* Testimonials (horizontal scroll) */
         .testimonials-section {
-            padding: 80px 80px;
-            background: #f8f9fa;
+            margin-bottom: 2rem;
+            padding: 20px 80px;
+
         }
 
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+        .testimonials-track-wrap {
+            position: relative;
             margin-top: 40px;
         }
 
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-        }
-
-        .stars {
-            color: #ffc107;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-text {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .testimonial-author {
+        .testimonials-track {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 30px;
+            /* overflow-x: auto; */
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background: #ddd;
-            border-radius: 50%;
+        .testimonials-track::-webkit-scrollbar{ display:none }
+
+        .testimonial-card {
+            flex: 0 0 28rem;
+            background: white;
+            padding: 36px;
+            border-radius: 18px;
+            box-shadow: 0 18px 50px rgba(15,23,42,0.08);
+            scroll-snap-align: start;
+            position: relative;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
         }
+
+        .testimonial-card .stars { font-size: 1.5rem; color: #ff7b24; margin-bottom: 18px; }
+        .testimonial-text { flex: 1 1 auto; margin-bottom: 18px; line-height: 1.7; color:#333 }
+
+        .testimonial-meta { display:flex; align-items:center; justify-content:space-between; }
+        .testimonial-author { display:flex; gap:12px; align-items:center }
+        .author-logo { width:56px; height:56px; border-radius:50%; background:#ff6b35; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:18px }
+
+        .testimonials-controls{ position:absolute; right:8px; bottom:-40px; display:flex; gap:12px }
+        .testimonials-controls button{ width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,0.06); background:white; cursor:pointer }
+
+        @media (max-width: 900px){ .testimonial-card{ flex:0 0 85%; } .testimonials-controls{ bottom:-30px } }
 
         /* CTA Section */
         .cta-section {
@@ -567,8 +822,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .testimonials-grid {
-                grid-template-columns: 1fr;
+            .testimonials-track {
+                padding-left: 16px;
             }
 
             header {
@@ -669,52 +924,63 @@
             <div class="toolkit-video">
                 <div class="video-container">
                     <!-- Replace with your actual video -->
-                    <video src="images/toolkit-video.mp4" poster="images/video-thumbnail.jpg"></video>
-                    <div class="play-button"></div>
+                    <video id="toolkitVideo" controls src="images/notebook.mp4" poster="images/notebook.jpg"></video>
+                    <div class="play-button" id="toolkitPlayButton"></div>
                 </div>
             </div>
 
-            <!-- Features List -->
-            <div class="toolkit-features">
-                <div class="toolkit-item">
-                    <h3 class="toolkit-item-title">
-                        160 Pages Notebook
-                        <img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow">
-                    </h3>
-                    <p class="toolkit-item-description">
-                        Swap out any regular class notebook with Supernotes, so your child gets introduced to 
-                        career planning essentials and explores career options across various fields while taking notes.
-                    </p>
+            <!-- Features List (Accordion) -->
+            <div class="toolkit-features" id="toolkitFeatures">
+                <div class="toolkit-item" data-video="images/notebook.mp4" data-poster="images/notebook.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>160 Pages Notebook</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Swap out any regular class notebook with Supernotes, so your child gets introduced to 
+                            career planning essentials and explores career options across various fields while taking notes.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
                 </div>
 
-                <div class="toolkit-item">
-                    <h3 class="toolkit-item-title">
-                        Gain Insights E-Book
-                    </h3>
-                    <p class="toolkit-item-description">
-                        Access comprehensive career insights and guidance to help make informed decisions about 
-                        your future career path.
-                    </p>
+                <div class="toolkit-item" data-video="images/ebook.mp4" data-poster="images/ebook.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Gain Insights E-Book</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Access comprehensive career insights and guidance to help make informed decisions about 
+                            your future career path.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
                 </div>
 
-                <div class="toolkit-item">
-                    <h3 class="toolkit-item-title">
-                        Connect with a Mentor
-                    </h3>
-                    <p class="toolkit-item-description">
-                        Get personalized guidance from experienced professionals who can help navigate your 
-                        career journey.
-                    </p>
+                <div class="toolkit-item" data-video="images/mentor.mp4" data-poster="images/mentor.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Connect with a Mentor</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Get personalized guidance from experienced professionals who can help navigate your 
+                            career journey.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
                 </div>
 
-                <div class="toolkit-item">
-                    <h3 class="toolkit-item-title">
-                        Access to Resources
-                    </h3>
-                    <p class="toolkit-item-description">
-                        Unlimited access to career planning tools, materials, and resources to support your 
-                        career development.
-                    </p>
+                <div class="toolkit-item" data-video="images/tap.mp4" data-poster="images/tap.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Access to Resources</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Unlimited access to career planning tools, materials, and resources to support your 
+                            career development.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -735,76 +1001,180 @@
 
     <!-- Explore Digital Section -->
     <section class="explore-section">
-        <h2 class="section-title">Explore digital <span class="highlight">content</span></h2>
+        <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="images/resources.png">
+            </div>
+            <h2 class="toolkit-title">
+                Explore digital <span class="orange-text">content</span>
+            </h2>
+            <p class="toolkit-subtitle">
+                Curated resources that build career awareness, academic confidence, and essential life skills.
+            </p>
+        </div>
+
+        <!-- <h2 class="section-title">Explore digital <span class="highlight">content</span></h2> -->
         
         <div class="resources-grid">
             <div class="resource-card">
-                <div class="resource-image"></div>
-                <div class="resource-content">
-                    <span class="resource-tag">Webinar</span>
-                    <h3 class="resource-title">Career Planning Workshop</h3>
+                <img class="resource-image" src="images/r1.png" alt="Career 101">
+                <div class="resource-content">                   
+                    <h3 class="resource-title">Career 101</h3>
+                    <p class="resource-desc">Guided conversations for smarter career choices.</p>
+                    <a class="resource-btn" href="https://simplebooklet.com/careerplanning101">Read now</a>
                 </div>
             </div>
             
             <div class="resource-card">
-                <div class="resource-image"></div>
-                <div class="resource-content">
-                    <span class="resource-tag">Article</span>
-                    <h3 class="resource-title">Industry Insights</h3>
+                <img class="resource-image" src="images/r2.png" alt="AI 101">
+                <div class="resource-content">                    
+                    <h3 class="resource-title">AI 101</h3>
+                    <p class="resource-desc">An easy introduction to AI and future-ready skills.</p>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/ai-101-first-ai-playbook-for-teens">Read now</a>
                 </div>
             </div>
             
             <div class="resource-card">
-                <div class="resource-image"></div>
-                <div class="resource-content">
-                    <span class="resource-tag">Video</span>
-                    <h3 class="resource-title">Success Stories</h3>
+                <img class="resource-image" src="images/r3.png" alt="School Success 101">
+                <div class="resource-content">                    
+                    <h3 class="resource-title">School Success 101</h3>
+                    <p class="resource-desc">Skills and habits for academic confidence.</p>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/money-talks-101">Read now</a>
                 </div>
             </div>
             
             <div class="resource-card">
-                <div class="resource-image"></div>
-                <div class="resource-content">
-                    <span class="resource-tag">Guide</span>
-                    <h3 class="resource-title">Career Roadmap</h3>
+                <img class="resource-image" src="images/r4.png" alt="Money Talks - 101">
+                <div class="resource-content">                  
+                    <h3 class="resource-title">Money Talks - 101</h3>
+                    <p class="resource-desc">Building smart money habits early.</p>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/school-success-101">Read now</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Articles Section -->
-    <section class="articles-section">
-        <div class="articles-container">
-            <div class="articles-image">
-                <img src="https://via.placeholder.com/400x500" alt="Student">
+
+
+
+    <!-- Our Services Section -->
+    <section class="services-section">
+        <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="images/services.png" alt="services badge">
             </div>
+            <h2 class="toolkit-title">
+                Our <span class="orange-text">Services</span>
+            </h2>
+            <p class="toolkit-subtitle">
+                Used by students for structured career planning & profile building
+            </p>
+        </div>
+
+        <div class="services-container">
             
-            <div class="articles-content">
-                <h2>Our <span class="highlight">Articles</span></h2>
-                <p>Discover insights and guidance for your career journey</p>
-                
-                <div class="articles-list">
-                    <div class="article-item">
-                        <div class="article-icon"></div>
-                        <div>
-                            <h4>Flexible Curriculum</h4>
-                            <p>Learn at your own pace with our adaptable content</p>
+            <div class="service-list">
+                <div class="service-item">
+                    <div class="service-icon"><img src="images/s1.png" alt="icon 1" style="width: auto; height: 11rem;"></div>
+                    <div class="service-text">
+                        <h4>Career Assessments</h4>
+                        <p>Explore the incredible advantages of enrolling in our courses and enhancing</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><img src="images/s2.png" alt="icon 2" style="width: auto; height: 11rem;"></div>
+                    <div class="service-text">
+                        <h4>4 Step Career Planning</h4>
+                        <p>Structured steps to help students plan and track career goals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-center">
+                <img src="images/sc.png" alt="Services image">
+            </div>
+
+            <div class="service-list">
+                <div class="service-item">
+                    <div class="service-icon"><img src="images/s3.png" alt="icon 3" style="width: auto; height: 11rem;"></div>
+                    <div class="service-text">
+                        <h4>Profile Building Program</h4>
+                        <p>Explore the advantages of enrolling in our profile building program.</p>
+                    </div>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon"><img src="images/s4.png" alt="icon 4" style="width: auto; height: 11rem;"></div>
+                    <div class="service-text">
+                        <h4>Virtual Internships</h4>
+                        <p>Hands-on experience and projects to build real-world skills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-cta">
+            <button class="cta-btn">
+                Download Program Flyers
+                <img src="images/arrow.png" alt="arrow" class="btn-arrow">
+            </button>
+        </div>
+    </section>
+
+    
+
+    <!-- Choosing the Wrong Career Section -->
+    <section class="choosing-section">
+
+        <div class="choosing-container">
+            <div class="choosing-left">
+                <div class="toolkit-header choosing-header" style="text-align: start; line-height: normal;">
+                    <h2 class="toolkit-title">Choosing the wrong <br><span class="orange-text">Career is costly</span></h2>
+                    <p class="toolkit-subtitle">Many parents worry about their child's future, but the lack of structured career planning can lead to:</p>
+                </div>
+                <img src="images/working.png" alt="student working" class="choosing-image">
+            </div>
+
+            <div class="choosing-right">
+                <div class="choosing-list">
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="images/c1.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Anxiety & Uncertainty</h4>
+                            <p>Not knowing how to help your child choose the right career.</p>
                         </div>
                     </div>
-                    
-                    <div class="article-item">
-                        <div class="article-icon"></div>
-                        <div>
-                            <h4>Expert Mentorship</h4>
-                            <p>Connect with industry professionals</p>
+
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="images/c2.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Wasted Time & Resources</h4>
+                            <p>Studying for a career that doesn't match their strengths.</p>
                         </div>
                     </div>
-                    
-                    <div class="article-item">
-                        <div class="article-icon"></div>
-                        <div>
-                            <h4>Personalized Support</h4>
-                            <p>Get guidance tailored to your goals</p>
+
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="images/c3.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Limited Financial Growth</h4>
+                            <p>Choosing an outdated or low-demand field.</p>
+                        </div>
+                    </div>
+
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="images/c4.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Emotional Frustration</h4>
+                            <p>Being stuck in an unfulfilling career impacts confidence.</p>
+                        </div>
+                    </div>
+
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="images/c5.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>A Lifetime of 'What Ifs'</h4>
+                            <p>Regret over missed opportunities and unexplored careers.</p>
                         </div>
                     </div>
                 </div>
@@ -812,107 +1182,322 @@
         </div>
     </section>
 
-    <!-- Choosing Section -->
-    <section class="explore-section">
-        <h2 class="section-title">Choosing the wrong <span class="highlight">career?</span></h2>
-        <div class="articles-list" style="max-width: 600px; margin: 0 auto;">
-            <div class="article-item">
-                <div class="article-icon"></div>
-                <div>
-                    <h4>Flexible Curriculum</h4>
-                    <p>Explore different paths before committing</p>
-                </div>
-            </div>
-            
-            <div class="article-item">
-                <div class="article-icon"></div>
-                <div>
-                    <h4>Expert Mentorship Program</h4>
-                    <p>Get guidance from those who've been there</p>
-                </div>
-            </div>
-            
-            <div class="article-item">
-                <div class="article-icon"></div>
-                <div>
-                    <h4>Personalized Support</h4>
-                    <p>Career counseling tailored to you</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
-    <!-- Testimonials -->
+    
+
+    <!-- Testimonials Section (Horizontal Scroller) -->
     <section class="testimonials-section">
-        <h2 class="section-title">What parents say about <span class="highlight">udayni</span></h2>
-        
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"Udayni has been instrumental in helping my daughter find her career path. The mentorship program is excellent!"</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar"></div>
-                    <div>
-                        <strong>Sunita Rao</strong>
-                        <div style="font-size: 12px; color: #666;">Parent</div>
-                    </div>
-                </div>
+         <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="images/testimonial.png">
             </div>
+            <h2 class="toolkit-title">
+                What parents say about <span class="orange-text">Supernotes</span>
+            </h2>
+            <p class="toolkit-subtitle">
+                Explore the incredible advantages of enrolling in our courses and enhancing your skills for the ultimate career success.
+            </p>
+        </div>
+        <div class="container">
             
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"The resources available are comprehensive and really helped my son make informed decisions about his future."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar"></div>
-                    <div>
-                        <strong>Rakesh</strong>
-                        <div style="font-size: 12px; color: #666;">Parent</div>
+
+            <div class="testimonials-track-wrap">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <div class="testimonial-card" data-color="#ffb59a">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“This is exactly what students need—something practical,
+accessible, and age-appropriate. Supernotes
+has filled a big gap in early career awareness.”</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Devika Jain</div>
+                                    <div style="color:#777; font-size:0.9rem">Career Mentor</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">D</div>
+                        </div>
                     </div>
+
+                    <div class="testimonial-card" data-color="#bfa0ff">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“As a school counselor, I recommend Supernotes to
+every parent. It helps start the right conversations at
+the right age”</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Shreyas</div>
+                                    <div style="color:#777; font-size:0.9rem">School Counselor</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">S</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card" data-color="#7ee3b3">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“The walkthrough sessions made everything clear for me. I finally understood how to choose subjects, explore careers, and plan my next steps”</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Preetam</div>
+                                    <div style="color:#777; font-size:0.9rem">Grade 9 Student</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">M</div>
+                        </div>
+
+                   
+                    </div>
+                     <div class="testimonial-card" data-color="#ffd6a5">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">“As a parent, I felt relieved after the walkthrough sessions. They helped my child understand options early and taught us what to focus on in each grade”</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Rohan Mehta</div>
+                                    <div style="color:#777; font-size:0.9rem">Parent</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">S</div>
+                        </div>
+
+                </div>
+
+                <div class="testimonials-controls">
+                    <button id="testPrev" aria-label="Previous">‹</button>
+                    <button id="testNext" aria-label="Next">›</button>
                 </div>
             </div>
-            
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"A wonderful platform that truly understands the needs of students and provides practical guidance."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar"></div>
-                    <div>
-                        <strong>Meenakshi</strong>
-                        <div style="font-size: 12px; color: #666;">Parent</div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2 class="section-title">Get in <span class="highlight">touch</span></h2>
-        
-        <div class="cta-boxes">
-            <div class="cta-box">
-                <div class="cta-box-icon"></div>
-                <h3>For Students</h3>
-                <button class="cta-btn">Get Started</button>
+    <!-- Contact / CTA 3-column Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-left">
+                <h2 class="contact-title">Get in <span class="orange-text">Touch</span></h2>
+                <p class="contact-sub">Unlock the full potential of your learning journey with Supernotes. Whether you need product details, help with your order, or guidance on choosing the right study resource.</p>
+                <button class="cta-btn contact-cta">Get Supernotes Complimentary <img src="images/arrow.png" alt="arrow" class="btn-arrow"></button>
             </div>
-            
-            <div class="cta-box">
-                <div class="cta-box-icon"></div>
-                <h3>For Mentors</h3>
-                <button class="cta-btn">Join Us</button>
+
+            <div class="contact-card">
+                <img src="images/whatsapp.png" alt="icon" class="contact-icon">
+                <h3>Connect with Mentors</h3>
+                <p>Would you like a mentor callback or program details?</p>
+                <div class="contact-phone">+91 9972140555</div>
             </div>
+
+            <div class="contact-card">
+                <img src="images/whatsapp.png" alt="icon" class="contact-icon">
+                <h3>Partner with Us</h3>
+                <p>We collaborate with educators and mentors to make career planning accessible and affordable for every student.</p>
+                <div class="contact-phone">+91 9972140555</div>
+            </div>
+
         </div>
     </section>
+
+    <style>
+        .contact-section{ padding:60px 80px; background:#f3f8ff; }
+        .contact-container{ max-width:1200px; margin:24px auto 0; display:grid; grid-template-columns: 2fr 1fr 1fr; gap:28px; align-items:stretch; }
+        .contact-left{ display:flex; flex-direction:column; justify-content:center; padding:26px 18px; }
+        .contact-title{ font-size:48px; margin:0 0 10px; }
+        .contact-title .orange-text{ color:#ff6b35; font-style:italic; display:inline-block; }
+        .contact-sub{ color:#606a75; margin-bottom:20px; max-width:420px; }
+        .contact-cta{ width:fit-content; }
+
+        .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; align-items:center; min-height:240px }
+        .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; box-shadow: 0 8px 30px rgba(20,184,166,0.06); }
+        .contact-card h3{ margin:12px 0 6px 0; font-size:20px }
+        .contact-card p{ color:#6b7280; font-size:14px; margin:0 0 10px; }
+        .contact-phone{ font-weight:800; margin-top:auto; }
+
+        @media (max-width: 900px){ .contact-container{ grid-template-columns: 1fr; } .contact-title{ font-size:32px } }
+    </style>
+        </style>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="#home">Home</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#terms">Terms</a>
-            <a href="#contact">Contact</a>
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-col footer-brand">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="Supernotes logo" style="height:36px">
+                </div>
+                <p class="footer-desc">At Pursue Academia, we are on a mission to make career planning structured, accessible, and stress free for students and parents.</p>
+                <div class="social-icons">
+                    <a class="social-link" href="#" aria-label="facebook"><img src="images/fb.png" alt="facebook" style="width:22px;height:22px"></a>
+                    <a class="social-link" href="#" aria-label="instagram"><img src="images/ig.png" alt="instagram" style="width:22px;height:22px"></a>
+                    <a class="social-link" href="#" aria-label="youtube"><img src="images/yt.png" alt="youtube" style="width:22px;height:22px"></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <ul class="footer-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#services">Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul class="footer-list">
+                    <li><a href="#testimonial">Testimonial</a></li>
+                    <li><a href="#contact">Contact us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Utility</h4>
+                <ul class="footer-list">
+                    <li><a href="#terms">Terms and Conditions</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
         </div>
-        <p>&copy; 2024 udayni. All rights reserved.</p>
+
+        <div class="footer-bottom">
+            <div class="copyright">Copyrights @ Supernotes</div>
+        </div>
+
+        <style>
+            .site-footer{ background: #fafbff; padding: 48px 80px 24px; color:#333 }
+            .footer-top{ display:grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap:28px; max-width:1200px; margin:0 auto 18px; align-items:start }
+            .footer-col h4{ margin:0 0 12px; font-size:18px }
+            .footer-desc{ color:#6b7280; max-width:360px; margin:8px 0 18px }
+            .social-icons{ display:flex; gap:14px }
+            .social-link{ width:56px; height:56px; border-radius:50%; background:white; display:inline-flex; align-items:center; justify-content:center; box-shadow: 0 8px 30px rgba(15,23,42,0.06); text-decoration:none }
+            .footer-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px }
+            .footer-list a{ color:#6b7280; text-decoration:none }
+            .footer-bottom{ border-top:1px solid rgba(0,0,0,0.06); padding-top:18px; text-align:center }
+            .copyright{ color:#9aa0a6 }
+
+            @media (max-width: 900px){
+                .footer-top{ grid-template-columns: 1fr; text-align:left }
+                .footer-desc{ max-width:100% }
+                .site-footer{ padding:28px 20px }
+            }
+        </style>
     </footer>
+    <script>
+        (function(){
+            const video = document.getElementById('toolkitVideo');
+            const playBtn = document.getElementById('toolkitPlayButton');
+            const items = document.querySelectorAll('#toolkitFeatures .toolkit-item');
+
+            function closeAll(){
+                items.forEach(it=>{
+                    it.classList.remove('active');
+                    const btn = it.querySelector('.toolkit-item-title');
+                    if(btn) btn.setAttribute('aria-expanded','false');
+                });
+            }
+
+            items.forEach(it=>{
+                const btn = it.querySelector('.toolkit-item-title');
+                btn.addEventListener('click', ()=>{
+                    const isActive = it.classList.contains('active');
+                    closeAll();
+                    if(!isActive){
+                        it.classList.add('active');
+                        btn.setAttribute('aria-expanded','true');
+                        const src = it.dataset.video;
+                        const poster = it.dataset.poster;
+                        if(src){
+                            // swap video source
+                            try{ video.pause(); }catch(e){}
+                            video.src = src;
+                            if(poster) video.poster = poster;
+                            video.load();
+                        }
+                    }
+                });
+            });
+
+            // Play overlay handling
+            if(playBtn){
+                playBtn.addEventListener('click', ()=>{
+                    if(video.paused) video.play(); else video.pause();
+                });
+            }
+
+            video.addEventListener('play', ()=>{ if(playBtn) playBtn.style.display='none'; });
+            video.addEventListener('pause', ()=>{ if(playBtn) playBtn.style.display='flex'; });
+
+            // initialize first item active (open by default)
+            if(items.length>0){
+                const first = items[0];
+                const btn = first.querySelector('.toolkit-item-title');
+                first.classList.add('active');
+                if(btn) btn.setAttribute('aria-expanded','true');
+                // set video to first item's video
+                const src = first.dataset.video;
+                const poster = first.dataset.poster;
+                if(src){
+                    try{ video.pause(); }catch(e){}
+                    video.src = src;
+                    if(poster) video.poster = poster;
+                    video.load();
+                }
+            }
+        })();
+    </script>
+
+    <script>
+        // Testimonials scroller controls
+        (function(){
+            const track = document.getElementById('testimonialsTrack');
+            const prev = document.getElementById('testPrev');
+            const next = document.getElementById('testNext');
+            if(!track) return;
+
+            const cardWidth = () => track.querySelector('.testimonial-card')?.getBoundingClientRect().width || 560;
+
+            next.addEventListener('click', ()=>{
+                track.scrollBy({ left: Math.round(cardWidth()+30), behavior: 'smooth' });
+            });
+
+            prev.addEventListener('click', ()=>{
+                track.scrollBy({ left: -Math.round(cardWidth()+30), behavior: 'smooth' });
+            });
+
+            // allow arrow keys when focus is inside track
+            track.tabIndex = 0;
+            track.addEventListener('keydown', (e)=>{
+                if(e.key === 'ArrowRight') next.click();
+                if(e.key === 'ArrowLeft') prev.click();
+            });
+
+            // set per-card author logo colors (use data-color or generate from name)
+            const stringToHsl = (str)=>{
+                let hash = 0; for(let i=0;i<str.length;i++) hash = str.charCodeAt(i) + ((hash<<5)-hash);
+                const h = Math.abs(hash) % 360;
+                return `hsl(${h} 70% 45%)`;
+            };
+
+            track.querySelectorAll('.testimonial-card').forEach(card=>{
+                const logo = card.querySelector('.author-logo');
+                if(!logo) return;
+                const color = card.dataset.color;
+                if(color) logo.style.background = color;
+                else {
+                    const nameEl = card.querySelector('.testimonial-author div div');
+                    const name = nameEl ? nameEl.textContent.trim() : '';
+                    logo.style.background = stringToHsl(name || 'anon');
+                }
+                // ensure initials match first letter of name if empty
+                if(!logo.textContent.trim()){
+                    const nameEl = card.querySelector('.testimonial-author div div');
+                    const name = nameEl ? nameEl.textContent.trim() : '';
+                    logo.textContent = (name && name[0]) ? name[0].toUpperCase() : '?';
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
