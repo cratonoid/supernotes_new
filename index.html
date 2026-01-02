@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Career Planning Made Easy</title>
+    <title>Supernotes</title>
+        <script>
+            // Prevent browsers from automatically restoring scroll position on reload
+            if ('scrollRestoration' in history) {
+                try { history.scrollRestoration = 'manual'; } catch (e) { /* ignore */ }
+            }
+        </script>
     <style>
         * {
         
@@ -19,17 +25,21 @@
 
         /* Header */
         header {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
-            padding: 20px 10rem;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 18px 4rem;
+            background: transparent;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            /* keep subtle backdrop if browser supports it */
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
         }
 
         .logo {
-            /* margin-left: 7rem; */
-            height: 25px;
+            height: 28px;
         }
 
         .logo img {
@@ -38,10 +48,10 @@
         }
 
         nav {
-            margin-right: 5 rem;
             display: flex;
             gap: 40px;
             align-items: center;
+            justify-self: center; /* center nav in header grid */
         }
 
         nav a {
@@ -60,6 +70,9 @@
             box-shadow: 0 6px 18px rgba(255,107,53,0.18);
             transition: transform 160ms ease, box-shadow 160ms ease;
         }
+
+        /* ensure get-in-touch sits on the right when in header grid */
+        header > .get-in-touch { justify-self: end; }
 
         .get-in-touch:hover {
             transform: translateY(-3px);
@@ -558,6 +571,7 @@
         }
 
         .choosing-container {
+            justify-content: center;
             display: flex;
             gap: 80px;
             max-width: 1200px;
@@ -566,6 +580,7 @@
         }
 
         .choosing-left {
+            max-width: 38%;
             flex: 1;
         }
 
@@ -579,6 +594,7 @@
         }
 
         .choosing-right {
+            max-width: 44%;
             flex: 1;
             padding-left: 20px;
         }
@@ -869,14 +885,8 @@
                 padding-left: 16px;
             }
 
-            header {
-                padding: 20px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
+            header { display:flex; justify-content:space-between; padding: 14px 18px; }
+            nav { gap: 14px; }
         }
     </style>
 </head>
@@ -890,8 +900,8 @@
             <a href="#home">Home</a>
             <a href="#explore">Courses</a>
             <a href="#services">Services</a>
-            <a class="get-in-touch" href="https://wa.link/ad0vun">Get in touch</a>
         </nav>
+        <a class="get-in-touch" href="https://wa.link/ad0vun">Get in touch</a>
     </header>
 
     <!-- Hero Section -->
@@ -1061,7 +1071,7 @@
                 <div class="resource-content">                   
                     <h3 class="resource-title">Career 101</h3>
                     <p class="resource-desc">Guided conversations for smarter career choices.</p>
-                    <a class="resource-btn" href="https://simplebooklet.com/careerplanning101">Read now</a>
+                    <a class="resource-btn" href="https://simplebooklet.com/careerplanning101" target="_blank" rel="noopener">Read now</a>
                 </div>
             </div>
             
@@ -1070,7 +1080,7 @@
                 <div class="resource-content">                    
                     <h3 class="resource-title">AI 101</h3>
                     <p class="resource-desc">An easy introduction to AI and future-ready skills.</p>
-                    <a class="resource-btn" href="https://nas.io/pursue/challenges/ai-101-first-ai-playbook-for-teens">Read now</a>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/ai-101-first-ai-playbook-for-teens" target="_blank" rel="noopener">Read now</a>
                 </div>
             </div>
             
@@ -1079,7 +1089,7 @@
                 <div class="resource-content">                    
                     <h3 class="resource-title">School Success 101</h3>
                     <p class="resource-desc">Skills and habits for academic confidence.</p>
-                    <a class="resource-btn" href="https://nas.io/pursue/challenges/money-talks-101">Read now</a>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/money-talks-101" target="_blank" rel="noopener">Read now</a>
                 </div>
             </div>
             
@@ -1088,7 +1098,7 @@
                 <div class="resource-content">                  
                     <h3 class="resource-title">Money Talks - 101</h3>
                     <p class="resource-desc">Building smart money habits early.</p>
-                    <a class="resource-btn" href="https://nas.io/pursue/challenges/school-success-101">Read now</a>
+                    <a class="resource-btn" href="https://nas.io/pursue/challenges/school-success-101" target="_blank" rel="noopener">Read now</a>
                 </div>
             </div>
         </div>
@@ -1542,7 +1552,7 @@ the right age”</div>
         })();
     </script>
     <script>
-        // Navbar behaviors: Home reloads, Courses -> Explore, Services -> Services
+        // Navbar behaviors: Home -> reload without hash; Courses/Services -> scroll then remove hash
         (function(){
             const homeLink = document.querySelector('nav a[href="#home"]');
             const exploreLink = document.querySelector('nav a[href="#explore"]');
@@ -1556,17 +1566,45 @@ the right age”</div>
                 });
             }
 
-            // ensure anchor default behavior will scroll to sections; add focus for accessibility
             [exploreLink, servicesLink].forEach(link=>{
                 if(!link) return;
-                link.addEventListener('click', function(){
-                    // allow default anchor navigation; ensure target gets focus for keyboard users
+                link.addEventListener('click', function(e){
+                    e.preventDefault();
                     const id = this.getAttribute('href')?.replace('#','');
                     const target = id ? document.getElementById(id) : null;
-                    if(target) target.setAttribute('tabindex','-1');
-                    setTimeout(()=>{ if(target) target.focus(); }, 300);
+                    if(target){
+                        // smooth scroll and focus for accessibility
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        target.setAttribute('tabindex','-1');
+                        // focus without changing scroll
+                        try{ target.focus({ preventScroll: true }); }catch(err){ /* ignore */ }
+                    }
+                    // remove hash from URL so reload doesn't preserve it
+                    history.replaceState(null, '', location.pathname + location.search);
                 });
             });
+        })();
+    </script>
+    <script>
+        // On page reload, clear any fragment identifier and reset scroll to top
+        (function(){
+            // prefer Navigation Timing Level 2
+            const isReload = (()=>{
+                try{
+                    const entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+                    if(entries && entries.length) return entries[0].type === 'reload';
+                    return performance.navigation && performance.navigation.type === 1;
+                }catch(e){ return false; }
+            })();
+
+            if(isReload && location.hash){
+                // remove hash without creating a new history entry
+                history.replaceState(null, '', location.pathname + location.search);
+                // ensure viewport is at top immediately
+                try{ window.scrollTo(0,0); }catch(e){ window.scrollTo(0,0); }
+                // some browsers restore scroll after load; repeat shortly after to override
+                setTimeout(function(){ try{ window.scrollTo(0,0); }catch(e){} }, 50);
+            }
         })();
     </script>
 </body>
