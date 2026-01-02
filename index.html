@@ -15,19 +15,20 @@
             line-height: 1.6;
             color: #333;
         }
+        html { scroll-behavior: smooth; }
 
         /* Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 80px;
+            padding: 20px 10rem;
             background: white;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
         .logo {
-            margin-left: 7rem;
+            /* margin-left: 7rem; */
             height: 25px;
         }
 
@@ -74,7 +75,7 @@
         /* Hero Section */
         .hero {
             margin-left: 1.5rem;
-            margin-right: 1.5rem;
+            margin-right: -0.4rem;
             position: relative;
             padding: 30px 80px;
             min-height: 640px;
@@ -154,7 +155,7 @@
             vertical-align: middle;
         }
         .hero-right {
-            flex: 1;
+            flex: 1.2;
             display: flex;
             justify-content: start;
             align-items: center;
@@ -239,10 +240,16 @@
 .toolkit-subtitle {
     color: #666;
     font-size: 16px;
-    max-width: 700px;
+    max-width: 60%;
     margin: 0 auto;
 }
 
+.services-subtitle {
+    color: #666;
+    font-size: 16px;
+    max-width: 40%;
+    margin: 0 auto;
+}
         .toolkit-content {
 
     display: flex;
@@ -253,6 +260,7 @@
 }
 
         .toolkit-video {
+            margin-left: 5rem;
     flex: 1.2;
     max-width: 720px;
     position: sticky; /* keep video visually stable when right column height changes */
@@ -614,12 +622,14 @@
         }
 
         .services-container {
-            margin-top: 40px;
+            margin-top: 0rem;
+            padding-left: 5rem;
+            padding-right: 5rem;
+            padding-top: 0rem;                   
             background-image: url('images/sb.png');
             background-size: cover;
             background-position: center;
-            border-radius: 20px;
-            padding: 48px;
+            border-radius: 20px;        
             display: flex;
             gap: 30px;
             align-items: center;
@@ -679,7 +689,7 @@
 
         .services-cta {
             text-align: center;
-            margin-top: 34px;
+           
         }
 
         @media (max-width: 992px) {
@@ -735,7 +745,7 @@
 
         /* Testimonials (horizontal scroll) */
         .testimonials-section {
-            margin-bottom: 2rem;
+      
             padding: 20px 80px;
 
         }
@@ -878,14 +888,14 @@
         </div>
         <nav>
             <a href="#home">Home</a>
-            <a href="#courses">Courses</a>
+            <a href="#explore">Courses</a>
             <a href="#services">Services</a>
             <a class="get-in-touch" href="https://wa.link/ad0vun">Get in touch</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="hero-container">
             <div class="hero-left">
                 <div class="hero-left-image">
@@ -1030,7 +1040,7 @@
    
 
     <!-- Explore Digital Section -->
-    <section class="explore-section">
+    <section id="explore" class="explore-section">
         <div class="toolkit-header">
             <div class="toolkit-badge">
                 <img src="images/resources.png">
@@ -1088,7 +1098,7 @@
 
 
     <!-- Our Services Section -->
-    <section class="services-section">
+    <section id="services" class="services-section">
         <div class="toolkit-header">
             <div class="toolkit-badge">
                 <img src="images/services.png" alt="services badge">
@@ -1096,7 +1106,7 @@
             <h2 class="toolkit-title">
                 Our <span class="orange-text">Services</span>
             </h2>
-            <p class="toolkit-subtitle">
+            <p class="services-subtitle">
                 Used by students for structured career planning & profile building
             </p>
         </div>
@@ -1161,7 +1171,7 @@
             <div class="choosing-left">
                 <div class="toolkit-header choosing-header" style="text-align: start; line-height: normal;">
                     <h2 class="toolkit-title">Choosing the wrong <br><span class="orange-text">Career is costly</span></h2>
-                    <p class="toolkit-subtitle">Many parents worry about their child's future, but the lack of structured career planning can lead to:</p>
+                    <p class="">Many parents worry about their child's future, but the lack of structured career planning can lead to:</p>
                 </div>
                 <img src="images/working.png" alt="student working" class="choosing-image">
             </div>
@@ -1528,6 +1538,34 @@ the right age”</div>
                     const name = nameEl ? nameEl.textContent.trim() : '';
                     logo.textContent = (name && name[0]) ? name[0].toUpperCase() : '?';
                 }
+            });
+        })();
+    </script>
+    <script>
+        // Navbar behaviors: Home reloads, Courses -> Explore, Services -> Services
+        (function(){
+            const homeLink = document.querySelector('nav a[href="#home"]');
+            const exploreLink = document.querySelector('nav a[href="#explore"]');
+            const servicesLink = document.querySelector('nav a[href="#services"]');
+
+            if(homeLink){
+                homeLink.addEventListener('click', function(e){
+                    e.preventDefault();
+                    // navigate to the same page without the hash so reload/visit goes to top
+                    location.replace(location.pathname + location.search);
+                });
+            }
+
+            // ensure anchor default behavior will scroll to sections; add focus for accessibility
+            [exploreLink, servicesLink].forEach(link=>{
+                if(!link) return;
+                link.addEventListener('click', function(){
+                    // allow default anchor navigation; ensure target gets focus for keyboard users
+                    const id = this.getAttribute('href')?.replace('#','');
+                    const target = id ? document.getElementById(id) : null;
+                    if(target) target.setAttribute('tabindex','-1');
+                    setTimeout(()=>{ if(target) target.focus(); }, 300);
+                });
             });
         })();
     </script>
