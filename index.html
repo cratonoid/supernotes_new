@@ -50,11 +50,13 @@
         }
 
         .get-in-touch {
-            background: white;
-            border: 1px solid #ddd;
+            background: #ff6b35;
+            color: white;
+            border: none;
             padding: 8px 24px;
             border-radius: 20px;
             cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255,107,53,0.18);
         }
 
         /* Hero Section */
@@ -123,6 +125,10 @@
             font-size: 16px;
             cursor: pointer;
             transition: transform 0.3s ease;
+            text-decoration: none; /* remove underline for anchor links */
+            display: inline-flex; /* ensure anchor can be centered like a button */
+            align-items: center;
+            justify-content: center;
         }
 
         .cta-btn:hover {
@@ -266,12 +272,13 @@
     transform: translate(-50%, -50%);
     width: 80px;
     height: 80px;
-    background: rgba(128, 128, 128, 0.8);
+    background: #ff6b35;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    box-shadow: 0 12px 30px rgba(255,107,53,0.18);
 }
 
 .play-button::after {
@@ -322,7 +329,7 @@
 
         .toolkit-arrow-wrap{display:flex; justify-content:flex-end;}
         .toolkit-arrow {
-    height: 5rem;
+    height: 4rem;
     width: auto;
     transition: none; /* keep arrow static */
 }
@@ -355,19 +362,20 @@
 
         /* video play overlay */
         .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    background: rgba(0,0,0,0.45);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 5;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: #525252;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 14px 36px rgba(255,107,53,0.18);
 }
 
         .play-button::after {
@@ -950,8 +958,7 @@
                     </button>
                     <div class="toolkit-body">
                         <div class="toolkit-item-description">
-                            Access comprehensive career insights and guidance to help make informed decisions about 
-                            your future career path.
+                            Parents and students can read the E-Book for valuable insights on career choices, study abroad options, and essential steps to guide students towards the right path.
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
@@ -963,8 +970,7 @@
                     </button>
                     <div class="toolkit-body">
                         <div class="toolkit-item-description">
-                            Get personalized guidance from experienced professionals who can help navigate your 
-                            career journey.
+                            Tap or Scan to connect with an expert mentor who will walk you through career planning tools, profile building activities, and strategies to boost admission chances at reputed universities.
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
@@ -976,8 +982,7 @@
                     </button>
                     <div class="toolkit-body">
                         <div class="toolkit-item-description">
-                            Unlimited access to career planning tools, materials, and resources to support your 
-                            career development.
+                            Swap out any regular class notebook with Supernotes, so your child gets introduced to career planning essentials and explores career options across various fields while taking notes.
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
@@ -1006,7 +1011,7 @@
                 <img src="images/resources.png">
             </div>
             <h2 class="toolkit-title">
-                Explore digital <span class="orange-text">content</span>
+                Explore digital <span class="orange-text">Resources</span>
             </h2>
             <p class="toolkit-subtitle">
                 Curated resources that build career awareness, academic confidence, and essential life skills.
@@ -1115,10 +1120,10 @@
         </div>
 
         <div class="services-cta">
-            <button class="cta-btn">
+            <a class="cta-btn" href="https://simplebooklet.com/ourservices3" target="_blank" rel="noopener">
                 Download Program Flyers
                 <img src="images/arrow.png" alt="arrow" class="btn-arrow">
-            </button>
+            </a>
         </div>
     </section>
 
@@ -1305,13 +1310,13 @@ the right age”</div>
         .contact-section{ padding:60px 80px; background:#f3f8ff; }
         .contact-container{ max-width:1200px; margin:24px auto 0; display:grid; grid-template-columns: 2fr 1fr 1fr; gap:28px; align-items:stretch; }
         .contact-left{ display:flex; flex-direction:column; justify-content:center; padding:26px 18px; }
-        .contact-title{ font-size:48px; margin:0 0 10px; }
+        .contact-title{ font-size:48px; margin:0px; }
         .contact-title .orange-text{ color:#ff6b35; font-style:italic; display:inline-block; }
         .contact-sub{ color:#606a75; margin-bottom:20px; max-width:420px; }
         .contact-cta{ width:fit-content; }
 
         .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; align-items:center; min-height:240px }
-        .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; box-shadow: 0 8px 30px rgba(20,184,166,0.06); }
+        .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; }
         .contact-card h3{ margin:12px 0 6px 0; font-size:20px }
         .contact-card p{ color:#6b7280; font-size:14px; margin:0 0 10px; }
         .contact-phone{ font-weight:800; margin-top:auto; }
@@ -1329,9 +1334,9 @@ the right age”</div>
                 </div>
                 <p class="footer-desc">At Pursue Academia, we are on a mission to make career planning structured, accessible, and stress free for students and parents.</p>
                 <div class="social-icons">
-                    <a class="social-link" href="#" aria-label="facebook"><img src="images/fb.png" alt="facebook" style="width:22px;height:22px"></a>
-                    <a class="social-link" href="#" aria-label="instagram"><img src="images/ig.png" alt="instagram" style="width:22px;height:22px"></a>
-                    <a class="social-link" href="#" aria-label="youtube"><img src="images/yt.png" alt="youtube" style="width:22px;height:22px"></a>
+                    <a class="social-link" href="#" aria-label="facebook"><img src="images/fb.png" alt="facebook" style="width: auto;height: 5rem;"></a>
+                    <a class="social-link" href="#" aria-label="instagram"><img src="images/ig.png" alt="instagram" style="width: auto;height: 5rem;"></a>
+                    <a class="social-link" href="#" aria-label="youtube"><img src="images/yt.png" alt="youtube" style="width: auto;height: 5rem;"></a>
                 </div>
             </div>
 
@@ -1366,12 +1371,14 @@ the right age”</div>
         </div>
 
         <style>
-            .site-footer{ background: #fafbff; padding: 48px 80px 24px; color:#333 }
+            .footer-desc, .footer-list{text-align: left;}
+            .footer-col { justify-items: left}
+            .site-footer{ background: #ffffff; padding: 48px 80px 24px; color:#333 }
             .footer-top{ display:grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap:28px; max-width:1200px; margin:0 auto 18px; align-items:start }
             .footer-col h4{ margin:0 0 12px; font-size:18px }
             .footer-desc{ color:#6b7280; max-width:360px; margin:8px 0 18px }
             .social-icons{ display:flex; gap:14px }
-            .social-link{ width:56px; height:56px; border-radius:50%; background:white; display:inline-flex; align-items:center; justify-content:center; box-shadow: 0 8px 30px rgba(15,23,42,0.06); text-decoration:none }
+            .social-link{ width:56px; height:56px; border-radius:50%; background:white; display:inline-flex; align-items:center; justify-content:center; text-decoration:none }
             .footer-list{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px }
             .footer-list a{ color:#6b7280; text-decoration:none }
             .footer-bottom{ border-top:1px solid rgba(0,0,0,0.06); padding-top:18px; text-align:center }
