@@ -889,6 +889,67 @@
             header { display:flex; justify-content:space-between; padding: 14px 18px; }
             nav { gap: 14px; }
         }
+
+        /* Mobile hero adjustments: remove left margin and normalize padding */
+        @media (max-width: 768px) {
+            .hero {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                padding: 24px 18px;
+                min-height: auto;
+                background-position: top center;
+            }
+            .hero-container { padding: 0; gap: 30px; }
+        }
+
+        /* Menu button + mobile CTA defaults */
+        .menu-button { display: none; flex-direction: column; gap: 6px; }
+        .menu-button .bar { display: block; width: 28px; height: 3px; background: #111; margin: 0; border-radius: 2px; transition: transform 200ms ease, opacity 200ms ease; }
+        .get-in-touch-mobile { display: none; }
+
+        @media (max-width: 768px) {
+            .menu-button { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; padding: 6px; gap: 6px; cursor: pointer; margin-left: auto; }
+            /* Nav hidden by default on mobile; toggled by JS */
+            nav.mobile-hidden { display: none; }
+            /* Right-aligned panel that opens from the top-right (near the hamburger) */
+            nav.mobile-open { 
+                position: absolute;
+                top: 60px;
+                right: 12px;
+                left: auto;
+                width: 220px;
+                background: white;
+                border-radius: 10px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(16,24,40,0.12);
+                z-index: 9998;
+                text-align: left;
+            }
+            /* make each link a full-row tap target */
+            nav.mobile-open a {
+                display: block;
+                width: 100%;
+                padding: 12px 10px;
+                border-radius: 8px;
+                color: #111;
+                text-decoration: none;
+            }
+            nav.mobile-open a:hover { background: rgba(16,24,40,0.04); }
+            /* Hide desktop CTA and style mobile CTA inside menu */
+            .get-in-touch { display: none; }
+            .get-in-touch-mobile {
+                display: block;
+                background: #ff6b35;
+                color: #fff;
+                padding: 10px 14px;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 8px 20px rgba(255,107,53,0.14);
+            }
+        }
     </style>
 </head>
 <body>
@@ -897,10 +958,17 @@
         <div class="logo">
             <img src="images/logo.png" alt="udayni logo">
         </div>
-        <nav>
+        <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav id="main-nav" class="mobile-hidden">
             <a href="#home">Home</a>
             <a href="#explore">Courses</a>
             <a href="#services">Services</a>
+            <!-- mobile-only copy of the CTA so it appears inside the hamburger menu -->
+            <a class="get-in-touch get-in-touch-mobile" href="https://wa.link/ad0vun">Get in touch</a>
         </nav>
         <a class="get-in-touch" href="https://wa.link/ad0vun">Get in touch</a>
     </header>
@@ -1584,6 +1652,58 @@ the right age”</div>
                     history.replaceState(null, '', location.pathname + location.search);
                 });
             });
+        })();
+    </script>
+    <script>
+        // Mobile menu toggle
+        (function(){
+            const btn = document.querySelector('.menu-button');
+            const nav = document.getElementById('main-nav');
+            if(!btn || !nav) return;
+
+            function setOpen(open){
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if(open){
+                    nav.classList.remove('mobile-hidden');
+                    nav.classList.add('mobile-open');
+                } else {
+                    nav.classList.remove('mobile-open');
+                    nav.classList.add('mobile-hidden');
+                }
+            }
+
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                setOpen(!expanded);
+            });
+
+            // close when clicking outside
+            document.addEventListener('click', function(e){
+                if(!nav.classList.contains('mobile-open')) return;
+                if(!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+            });
+
+            // respond to resize
+            window.addEventListener('resize', function(){
+                if(window.innerWidth > 768){
+                    nav.classList.remove('mobile-hidden','mobile-open');
+                    btn.style.display = 'none';
+                } else {
+                    if(!nav.classList.contains('mobile-open')) nav.classList.add('mobile-hidden');
+                    btn.style.display = '';
+                }
+            });
+
+            // initial state
+            if(window.innerWidth <= 768){
+                btn.style.display = '';
+                nav.classList.add('mobile-hidden');
+                btn.setAttribute('aria-expanded','false');
+            } else {
+                btn.style.display = 'none';
+                nav.classList.remove('mobile-hidden','mobile-open');
+            }
         })();
     </script>
     <script>
