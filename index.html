@@ -237,30 +237,34 @@
         justify-items: center;
     }
     .toolkit-section {
-        padding: 20px 16px;
+        padding: 20px 0px;
+    }
+    .toolkit-header {
+        padding: 0 16px;
     }
     .toolkit-title br {
         display: none;
     }
     .toolkit-content {
-        gap: 24px;
+        gap: 0px;
+        flex-direction: column;
     }
     .toolkit-video {
         margin-left: 0;
+        display: none !important;
     }
     .toolkit-features {
         max-width: 100%;
     }
     .toolkit-title {
-
         font-size: 2.1rem !important;
         text-align: center;
     }
     .toolkit-subtitle {
- 
-    color: #666;
-    font-size: 16px;
-    max-width: 100% !important;
+        color: #666;
+        font-size: 16px;
+        max-width: 100% !important;
+        margin-bottom: 20px;
     }
     
     /* Force all toolkit items to stay expanded ONLY on mobile */
@@ -268,16 +272,46 @@
         margin-right: 0rem !important;
         max-height: none !important;
         overflow: visible !important;
-        padding: 15px 0 !important;
+        padding: 20px 16px 40px 16px !important;
         opacity: 1 !important;
         visibility: visible !important;
+        background: #F2F6FF;
     }
     
-    /* Disable click on mobile */
+    /* Sticky title effect - each title sticks below the previous one */
     .toolkit-item-title {
-        font-size: 2.1rem !important;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
         pointer-events: none !important;
         cursor: default !important;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        background: #F2F6FF !important;
+        padding: 20px 16px !important;
+        margin: 0 !important;
+        border-top: 1px solid #d8dbe6 !important;
+        border-bottom: 1px solid #d8dbe6 !important;
+        display: block !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+    
+    /* Stack titles below each other - each at a different offset */
+    .toolkit-item:nth-child(1) .toolkit-item-title { 
+        top: 6% !important;
+        z-index: 101 !important; 
+    }
+    .toolkit-item:nth-child(2) .toolkit-item-title { 
+        top: 6% !important;
+        z-index: 102 !important; 
+    }
+    .toolkit-item:nth-child(3) .toolkit-item-title { 
+        top: 6% !important;
+        z-index: 103 !important; 
+    }
+    .toolkit-item:nth-child(4) .toolkit-item-title { 
+        top: 6% !important;
+        z-index: 104 !important; 
     }
     
     /* Show individual video containers on mobile */
