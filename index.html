@@ -17,6 +17,9 @@
         }
 
         body {
+            /* margin:0rem; */
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
@@ -147,7 +150,7 @@
             background: #ff6b35;
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 15px 35px;
             border-radius: 25px;
             font-size: 16px;
             cursor: pointer;
@@ -224,6 +227,39 @@
 .toolkit-section {
     padding: 7px 80px;
     background: #F2F6FF;
+}
+
+@media (max-width: 768px) {
+    .toolkit-section {
+        padding: 20px 16px;
+    }
+    .toolkit-title br {
+        display: none;
+    }
+    .toolkit-content {
+        gap: 24px;
+    }
+    .toolkit-video {
+        margin-left: 0;
+    }
+    .toolkit-features {
+        max-width: 100%;
+    }
+    .toolkit-title {
+
+        font-size: 2.1rem !important;
+        text-align: center;
+    }
+    .toolkit-subtitle {
+ 
+    color: #666;
+    font-size: 16px;
+    max-width: 100% !important;
+    }
+    .toolkit-body{
+        margin-right: 0rem !important;
+    }
+
 }
 
 .toolkit-header {
@@ -433,6 +469,42 @@
     .toolkit-video {
         max-width: 100%;
         position: static; /* disable sticky on small screens */
+    }
+    
+    .explore-section {
+        padding: 0.7rem !important;
+    }
+    
+    /* Horizontal scrollable cards on mobile */
+    .resources-grid {
+        display: flex;
+        grid-template-columns: unset;
+        gap: 16px;
+        margin-top: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        padding-bottom: 8px;
+    }
+    
+    .resources-grid::-webkit-scrollbar {
+        height: 6px;
+    }
+    
+    .resources-grid::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    .resources-grid::-webkit-scrollbar-thumb {
+        background: #ff6b35;
+        border-radius: 10px;
+    }
+    
+    .resource-card {
+        flex: 0 0 70%;
+        min-width: 280px;
     }
 }
         /* Why Section */
@@ -813,10 +885,10 @@
         .testimonial-author { display:flex; gap:12px; align-items:center }
         .author-logo { width:56px; height:56px; border-radius:50%; background:#ff6b35; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; font-size:18px }
 
-        .testimonials-controls{ position:absolute; right:8px; bottom:-40px; display:flex; gap:12px }
+        .testimonials-controls{ position:absolute; right:0rem; bottom:0rem; display:flex; gap:12px }
         .testimonials-controls button{ width:36px; height:36px; border-radius:50%; border:1px solid rgba(0,0,0,0.06); background:white; cursor:pointer }
 
-        @media (max-width: 900px){ .testimonial-card{ flex:0 0 85%; } .testimonials-controls{ bottom:-30px } }
+        @media (max-width: 900px){ .testimonial-card{ flex:0 0 85%; } .testimonials-controls{ bottom:0rem } }
 
         /* CTA Section */
         .cta-section {
@@ -875,11 +947,22 @@
 
             .hero-left-image,
             .hero-right-image {
-                max-width: 300px;
+                max-width: 100%;
             }
 
             .resources-grid {
-                grid-template-columns: 1fr;
+                display: flex;
+                grid-template-columns: unset;
+                gap: 16px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+            }
+            
+            .resource-card {
+                flex: 0 0 85%;
+                min-width: 280px;
             }
 
             .testimonials-track {
@@ -888,6 +971,139 @@
 
             header { display:flex; justify-content:space-between; padding: 14px 18px; }
             nav { gap: 14px; }
+            
+            /* Testimonials section mobile padding */
+            .testimonials-section {
+                padding: 20px 16px;
+            }
+            
+            .testimonials-track {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+            
+            
+            /* Choosing section mobile padding */
+            .choosing-section {
+                padding: 20px 16px;
+            }
+            
+            .choosing-container {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            .choosing-left,
+            .choosing-right {
+                max-width: 100% !important;
+                width: 100%;
+            }
+            
+            /* Services section mobile padding */
+            .services-section {
+                        margin-right: 2rem;
+        margin-left: 2rem;
+                padding: 0rem;
+            }
+            
+            .services-container {
+                display: flex !important;
+                flex-direction: column;
+                padding: 0 !important;
+                gap: 20px;
+                background-image: none !important;
+                -webkit-mask-image: none !important;
+                mask-image: none !important;
+            }
+            
+            .service-center {
+                order: 2;
+                width: 100%;
+            }
+            
+            .service-center img {
+                width: 100%;
+                height: auto;
+            }
+            
+            .service-list {
+                flex: 1 1 22px !important;
+                width: 100%;
+                padding: 0 !important;
+                /* Remove fading effect */
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+            
+            .service-list:first-of-type {
+                order: 3;
+            }
+            
+            .service-list:last-of-type {
+                order: 4;
+            }
+            
+            .service-item {
+                display: flex;
+                gap: 12px;
+                /* margin-bottom: 16px; */
+                align-items: flex-start;
+            }
+            
+            .service-icon {
+          
+        height: 7rem;
+                flex: 0 0 5rem;
+              
+               
+            }
+            
+            .service-icon img {
+             
+                height: 11rem !important;
+            }
+            
+            .service-text {
+                flex: 1;
+            }
+            
+            .service-text h4 {
+                        font-size: 1.4rem;
+                font-weight: 600;
+                margin: 0 0 6px 0;
+            }
+            
+            .service-text p {
+                        font-size: 1rem;
+                margin: 0;
+                color: #666;
+                line-height: 1.4;
+            }
+            
+            .services-cta {
+                order: 5;
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+            .services-subtitle {
+                max-width: 100% !important;
+            }
+            
+            /* Contact section mobile padding */
+            .contact-section {
+                padding: 20px 16px !important;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .contact-title {
+                font-size: 28px !important;
+            }
+
         }
 
         /* Mobile hero adjustments: remove left margin and normalize padding */
@@ -895,7 +1111,7 @@
             .hero {
                 margin-left: 0 !important;
                 margin-right: 0 !important;
-                padding: 24px 18px;
+                padding: 1rem;
                 min-height: auto;
                 background-position: top center;
             }
@@ -943,7 +1159,7 @@
             .get-in-touch-mobile {
                 display: block;
                 background: #ff6b35;
-                color: #fff;
+                color: #fff !important;
                 padding: 10px 14px;
                 border-radius: 20px;
                 text-align: center;
