@@ -230,6 +230,12 @@
 }
 
 @media (max-width: 768px) {
+    .video-container{
+        width: 70% !important;
+    }
+    .toolkit-item{
+        justify-items: center;
+    }
     .toolkit-section {
         padding: 20px 16px;
     }
@@ -256,8 +262,77 @@
     font-size: 16px;
     max-width: 100% !important;
     }
+    
+    /* Force all toolkit items to stay expanded ONLY on mobile */
     .toolkit-body{
         margin-right: 0rem !important;
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 15px 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* Disable click on mobile */
+    .toolkit-item-title {
+        font-size: 2.1rem !important;
+        pointer-events: none !important;
+        cursor: default !important;
+    }
+    
+    /* Show individual video containers on mobile */
+    .toolkit-item-video {
+        display: block !important;
+        margin-top: 20px;
+        position: relative;
+        background: #eaeef6;
+        border-radius: 20px;
+        overflow: hidden;
+        padding-bottom: 56.25%;
+        width: 100%;
+    }
+    
+    .toolkit-item-video video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .toolkit-item-video .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: #525252;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 5;
+        box-shadow: 0 14px 36px rgba(255,107,53,0.18);
+    }
+    
+    .toolkit-item-video .play-button::after {
+        content: '▶';
+        color: white;
+        font-size: 24px;
+        margin-left: 4px;
+    }
+    
+    /* Add line above first toolkit item on mobile */
+    .toolkit-item:first-child::before {
+        content: '';
+        display: block;
+        height: 1px;
+        background: #d8dbe6;
+        width: 100%;
+        margin-bottom: 20px;
     }
 
 }
@@ -310,8 +385,9 @@
 }
 
         .toolkit-video {
-            margin-left: 5rem;
-    flex: 1.2;
+            justify-items: end;
+            /* margin-left: 5rem; */
+    flex: 1;
     max-width: 720px;
     position: sticky; /* keep video visually stable when right column height changes */
     top: 120px;
@@ -319,6 +395,7 @@
 }
 
         .video-container {
+            width: 57%;
     position: relative;
     background: #eaeef6;
     border-radius: 20px;
@@ -362,8 +439,12 @@
 
         .toolkit-features {
     flex: 1;
-    max-width: 520px;
 }
+
+        /* Hide mobile video containers on desktop */
+        .toolkit-item-video {
+            display: none;
+        }
 
         .toolkit-item {
     padding: 10px 0;
@@ -405,7 +486,7 @@
 }
 
         .toolkit-body {
-            margin-right: 8rem;
+            margin-right: 13rem;
     display: flex;
     gap: 20px;
     align-items: flex-start;
@@ -423,7 +504,7 @@
 }
 
         .toolkit-item.active .toolkit-body {
-            margin-right: 8rem;
+            margin-right: 13rem;
     max-height: 400px;
     padding-top: 15px;
 }
@@ -969,8 +1050,23 @@
                 padding-left: 16px;
             }
 
-            header { display:flex; justify-content:space-between; padding: 14px 18px; }
+            header { 
+                display:flex; 
+                justify-content:space-between; 
+                padding: 14px 18px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.95);
+                z-index: 9999;
+            }
             nav { gap: 14px; }
+            
+            /* Add padding to body to compensate for fixed header */
+            body {
+                padding-top: 60px;
+            }
             
             /* Testimonials section mobile padding */
             .testimonials-section {
@@ -1280,6 +1376,10 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
+                    <div class="video-container toolkit-item-video">
+                        <video controls src="images/notebook.mp4" poster="images/notebook.jpg"></video>
+                        <div class="play-button"></div>
+                    </div>
                 </div>
 
                 <div class="toolkit-item" data-video="images/ebook.mp4" data-poster="images/ebook.jpg">
@@ -1291,6 +1391,10 @@
                             Parents and students can read the E-Book for valuable insights on career choices, study abroad options, and essential steps to guide students towards the right path.
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                    <div class="video-container toolkit-item-video">
+                        <video controls src="images/ebook.mp4" poster="images/ebook.jpg"></video>
+                        <div class="play-button"></div>
                     </div>
                 </div>
 
@@ -1304,6 +1408,10 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
+                    <div class="video-container toolkit-item-video">
+                        <video controls src="images/mentor.mp4" poster="images/mentor.jpg"></video>
+                        <div class="play-button"></div>
+                    </div>
                 </div>
 
                 <div class="toolkit-item" data-video="images/tap.mp4" data-poster="images/tap.jpg">
@@ -1315,6 +1423,10 @@
                             Swap out any regular class notebook with Supernotes, so your child gets introduced to career planning essentials and explores career options across various fields while taking notes.
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                    <div class="video-container toolkit-item-video">
+                        <video controls src="images/tap.mp4" poster="images/tap.jpg"></video>
+                        <div class="play-button"></div>
                     </div>
                 </div>
             </div>
@@ -1726,6 +1838,7 @@ the right age”</div>
             const video = document.getElementById('toolkitVideo');
             const playBtn = document.getElementById('toolkitPlayButton');
             const items = document.querySelectorAll('#toolkitFeatures .toolkit-item');
+            const isMobile = window.innerWidth <= 768;
 
             function closeAll(){
                 items.forEach(it=>{
@@ -1735,51 +1848,74 @@ the right age”</div>
                 });
             }
 
-            items.forEach(it=>{
-                const btn = it.querySelector('.toolkit-item-title');
-                btn.addEventListener('click', ()=>{
-                    const isActive = it.classList.contains('active');
-                    closeAll();
-                    if(!isActive){
-                        it.classList.add('active');
-                        btn.setAttribute('aria-expanded','true');
-                        const src = it.dataset.video;
-                        const poster = it.dataset.poster;
-                        if(src){
-                            // swap video source
-                            try{ video.pause(); }catch(e){}
-                            video.src = src;
-                            if(poster) video.poster = poster;
-                            video.load();
-                        }
+            // On mobile, keep all items expanded
+            if(isMobile){
+                items.forEach(it=>{
+                    it.classList.add('active');
+                    const btn = it.querySelector('.toolkit-item-title');
+                    if(btn) btn.setAttribute('aria-expanded','true');
+                    
+                    // Handle play button for each mobile video
+                    const itemVideo = it.querySelector('.toolkit-item-video video');
+                    const itemPlayBtn = it.querySelector('.toolkit-item-video .play-button');
+                    
+                    if(itemPlayBtn && itemVideo){
+                        itemPlayBtn.addEventListener('click', ()=>{
+                            if(itemVideo.paused) itemVideo.play(); else itemVideo.pause();
+                        });
+                        
+                        itemVideo.addEventListener('play', ()=>{ itemPlayBtn.style.display='none'; });
+                        itemVideo.addEventListener('pause', ()=>{ itemPlayBtn.style.display='flex'; });
                     }
                 });
-            });
-
-            // Play overlay handling
-            if(playBtn){
-                playBtn.addEventListener('click', ()=>{
-                    if(video.paused) video.play(); else video.pause();
+            } else {
+                // Desktop accordion behavior
+                items.forEach(it=>{
+                    const btn = it.querySelector('.toolkit-item-title');
+                    btn.addEventListener('click', ()=>{
+                        const isActive = it.classList.contains('active');
+                        closeAll();
+                        if(!isActive){
+                            it.classList.add('active');
+                            btn.setAttribute('aria-expanded','true');
+                            const src = it.dataset.video;
+                            const poster = it.dataset.poster;
+                            if(src){
+                                // swap video source
+                                try{ video.pause(); }catch(e){}
+                                video.src = src;
+                                if(poster) video.poster = poster;
+                                video.load();
+                            }
+                        }
+                    });
                 });
-            }
 
-            video.addEventListener('play', ()=>{ if(playBtn) playBtn.style.display='none'; });
-            video.addEventListener('pause', ()=>{ if(playBtn) playBtn.style.display='flex'; });
+                // Play overlay handling
+                if(playBtn){
+                    playBtn.addEventListener('click', ()=>{
+                        if(video.paused) video.play(); else video.pause();
+                    });
+                }
 
-            // initialize first item active (open by default)
-            if(items.length>0){
-                const first = items[0];
-                const btn = first.querySelector('.toolkit-item-title');
-                first.classList.add('active');
-                if(btn) btn.setAttribute('aria-expanded','true');
-                // set video to first item's video
-                const src = first.dataset.video;
-                const poster = first.dataset.poster;
-                if(src){
-                    try{ video.pause(); }catch(e){}
-                    video.src = src;
-                    if(poster) video.poster = poster;
-                    video.load();
+                video.addEventListener('play', ()=>{ if(playBtn) playBtn.style.display='none'; });
+                video.addEventListener('pause', ()=>{ if(playBtn) playBtn.style.display='flex'; });
+
+                // initialize first item active (open by default)
+                if(items.length>0){
+                    const first = items[0];
+                    const btn = first.querySelector('.toolkit-item-title');
+                    first.classList.add('active');
+                    if(btn) btn.setAttribute('aria-expanded','true');
+                    // set video to first item's video
+                    const src = first.dataset.video;
+                    const poster = first.dataset.poster;
+                    if(src){
+                        try{ video.pause(); }catch(e){}
+                        video.src = src;
+                        if(poster) video.poster = poster;
+                        video.load();
+                    }
                 }
             }
         })();
