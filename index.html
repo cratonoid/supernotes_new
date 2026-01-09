@@ -230,33 +230,18 @@
 }
 
 @media (max-width: 768px) {
-    .video-container{
-        width: 70% !important;
-    }
-    .toolkit-item{
-        justify-items: center;
-    }
     .toolkit-section {
-        padding: 20px 0px;
+        padding: 40px 20px;
     }
     .toolkit-header {
         padding: 0 16px;
+        margin-bottom: 30px;
     }
     .toolkit-title br {
         display: none;
     }
-    .toolkit-content {
-        gap: 0px;
-        flex-direction: column;
-    }
-    .toolkit-video {
-        margin-left: 0;
-        display: none !important;
-    }
-    .toolkit-features {
-        max-width: 100%;
-    }
     .toolkit-title {
+        line-height: 1.3;
         font-size: 2.1rem !important;
         text-align: center;
     }
@@ -267,106 +252,62 @@
         margin-bottom: 20px;
     }
     
-    /* Force all toolkit items to stay expanded ONLY on mobile */
-    .toolkit-body{
-        margin-right: 0rem !important;
-        max-height: none !important;
-        overflow: visible !important;
-        padding: 20px 16px 40px 16px !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        background: #F2F6FF;
+    /* Hide the toolkit content (accordion/features) on mobile */
+    .toolkit-content {
+        display: none !important;
     }
     
-    /* Sticky title effect - each title sticks below the previous one */
-    .toolkit-item-title {
-        font-size: 2rem !important;
-        font-weight: 700 !important;
-        pointer-events: none !important;
-        cursor: default !important;
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        background: #F2F6FF !important;
-        padding: 20px 16px !important;
-        margin: 0 !important;
-        border-top: 1px solid #d8dbe6 !important;
-        border-bottom: 1px solid #d8dbe6 !important;
+    /* Mobile video styling */
+    .toolkit-mobile-video {
         display: block !important;
-        width: 100% !important;
-        text-align: left !important;
-    }
-    
-    /* Stack titles below each other - each at a different offset */
-    .toolkit-item:nth-child(1) .toolkit-item-title { 
-        top: 6.6% !important;
-        z-index: 101 !important; 
-    }
-    .toolkit-item:nth-child(2) .toolkit-item-title { 
-        top: 6.6% !important;
-        z-index: 102 !important; 
-    }
-    .toolkit-item:nth-child(3) .toolkit-item-title { 
-        top: 6.6% !important;
-        z-index: 103 !important; 
-    }
-    .toolkit-item:nth-child(4) .toolkit-item-title { 
-        top: 6.6% !important;
-        z-index: 104 !important; 
-    }
-    
-    /* Show individual video containers on mobile */
-    .toolkit-item-video {
-        display: block !important;
-        margin-top: 20px;
         position: relative;
-        background: #eaeef6;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 30px;
+        background: transparent;
         border-radius: 20px;
         overflow: hidden;
-        padding-bottom: 56.25%;
-        width: 100%;
     }
     
-    .toolkit-item-video video {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .toolkit-mobile-video video {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
+        display: block;
+        border-radius: 20px;
     }
     
-    .toolkit-item-video .play-button {
+    .toolkit-mobile-video .play-button {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 80px;
         height: 80px;
-        background: #525252;
+        background: rgba(82, 82, 82, 0.9);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        z-index: 5;
-        box-shadow: 0 14px 36px rgba(255,107,53,0.18);
+        z-index: 10;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
     }
     
-    .toolkit-item-video .play-button::after {
+    .toolkit-mobile-video .play-button:hover {
+        background: rgba(82, 82, 82, 1);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    
+    .toolkit-mobile-video .play-button::after {
         content: '▶';
         color: white;
-        font-size: 24px;
-        margin-left: 4px;
+        font-size: 28px;
+        margin-left: 5px;
     }
     
-    /* Add line above first toolkit item on mobile */
-    .toolkit-item:first-child::before {
-        content: '';
-        display: block;
-        height: 1px;
-        background: #d8dbe6;
-        width: 100%;
-        margin-bottom: 20px;
+    .toolkit-cta {
+        text-align: center;
     }
 
 }
@@ -1253,6 +1194,95 @@
         .menu-button .bar { display: block; width: 28px; height: 3px; background: #111; margin: 0; border-radius: 2px; transition: transform 200ms ease, opacity 200ms ease; }
         .get-in-touch-mobile { display: none; }
 
+        /* Popup Form Styles */
+        @media(max-width:767px){ #customPopupOverlay{ height:100dvh !important; } }
+
+        #customPopupOverlay{
+          display:none;
+          position:fixed !important;
+          inset:0;
+          width:100vw;
+          height:100vh;
+          background:rgba(0,0,0,0.75);
+          backdrop-filter:blur(4px);
+          padding:16px;
+          box-sizing:border-box;
+          z-index:2147483646;
+          justify-content:center;
+          align-items:center;
+          overflow-y:auto;
+        }
+
+        #customPopupBox{
+          width:100%;
+          max-width:700px;
+          background:#fff;
+          border-radius:12px;
+          border:2px solid #000;
+          padding:32px;
+          box-shadow:0 30px 90px rgba(0,0,0,0.3), 
+                     0 15px 40px rgba(0,0,0,0.22), 
+                     0 5px 15px rgba(0,0,0,0.15);
+          box-sizing:border-box;
+          position:relative;
+          margin:auto;
+          transform:none !important;
+          z-index:2147483647;
+          font-family:Poppins, sans-serif;
+        }
+
+        #closePopup{
+          position:absolute;
+          right:16px;
+          top:16px;
+          width:36px;
+          height:36px;
+          font-size:28px;
+          line-height:1;
+          border:2px solid #333;
+          border-radius:50%;
+          background:#fff;
+          cursor:pointer;
+          color:#333;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          transition:all 0.3s ease;
+          font-weight:300;
+        }
+
+        #closePopup:hover{
+          background:#333;
+          color:#fff;
+          transform:rotate(90deg);
+          border-color:#000;
+        }
+
+        #closePopup:focus{
+          outline:2px solid #ff6b35;
+          outline-offset:2px;
+        }
+
+        .customForm label{ display:block; margin-top:10px; font-weight:600; font-size:14px; }
+        .customForm label::after{ content: attr(data-required); color: #ff0000; }
+        .customForm input, .customForm textarea{
+          width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box;
+        }
+        .customForm button{ width:100%; padding:12px; margin-top:16px; border-radius:8px; border:0; background:#000; color:#fff; font-weight:600; cursor:pointer; }
+
+        .elementor-element.openPopup, .elementor-element.openPopup a,
+        .elementor-widget-container, .elementor-widget-button {
+          pointer-events: auto !important;
+        }
+
+        #loader{
+          display:none;
+          position:fixed; inset:0;
+          background:rgba(255,255,255,0.9);
+          z-index:2147483648;
+          justify-content:center; align-items:center; font-size:20px; font-weight:600;
+        }
+
         @media (max-width: 768px) {
             .menu-button { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; padding: 6px; gap: 6px; cursor: pointer; margin-left: auto; }
             /* Nav hidden by default on mobile; toggled by JS */
@@ -1326,7 +1356,7 @@
                 <div class="hero-left-image">
                     <img src="images/mb1.png" alt="Hero Left">
                 </div>
-                <a class="cta-btn" href="#contact">
+                <a class="cta-btn openPopup" href="javascript:void(0)">
                     Get Supernotes Complimentary 
                     <img src="images/arrow.png" alt="arrow" class="btn-arrow">
                 </a>
@@ -1381,10 +1411,10 @@
                 Why do we call it 4-1 one<br>
                 tool kit - <span class="orange-text">Whats included</span>
             </h2>
-            <p class="toolkit-subtitle">
+            <!-- <p class="toolkit-subtitle">
                 This book transforms even the toughest topics into quick, digestible Super Notes designed to 
                 improve memory retention, exam performance, and self-learning confidence.
-            </p>
+            </p> -->
         </div>
 
         <div class="toolkit-content">
@@ -1466,8 +1496,14 @@
             </div>
         </div>
 
+        <!-- Mobile-only video -->
+        <div class="toolkit-mobile-video" style="display: none;">
+            <video id="mobileToolkitVideo" controls src="images/promo.mp4" poster="images/promo.jpg"></video>
+            <div class="play-button" id="mobilePlayButton"></div>
+        </div>
+
         <div class="toolkit-cta">
-            <a class="cta-btn" href="#contact">
+            <a class="cta-btn openPopup" href="javascript:void(0)">
                 Get Supernotes Complimentary
                 <img src="images/arrow.png" alt="arrow" class="btn-arrow">
             </a>
@@ -1502,7 +1538,7 @@
                 <div class="resource-content">                   
                     <h3 class="resource-title">Career 101</h3>
                     <p class="resource-desc">Guided conversations for smarter career choices.</p>
-                    <a class="resource-btn" href="https://simplebooklet.com/careerplanning101" target="_blank" rel="noopener">Read now</a>
+                    <a class="resource-btn" href="https://simplebooklet.com/101careertalks#page=1" target="_blank" rel="noopener">Read now</a>
                 </div>
             </div>
             
@@ -1762,22 +1798,26 @@ the right age”</div>
             <div class="contact-left">
                 <h2 class="contact-title">Get in <span class="orange-text">Touch</span></h2>
                 <p class="contact-sub">Unlock the full potential of your learning journey with Supernotes. Whether you need product details, help with your order, or guidance on choosing the right study resource.</p>
-                <a class="cta-btn contact-cta" href="#contact">Get Supernotes Complimentary <img src="images/arrow.png" alt="arrow" class="btn-arrow"></a>
+                <a class="cta-btn contact-cta openPopup" href="javascript:void(0)">Get Supernotes Complimentary <img src="images/arrow.png" alt="arrow" class="btn-arrow"></a>
             </div>
 
-            <div class="contact-card">
-                <img src="images/whatsapp.png" alt="icon" class="contact-icon">
-                <h3>Connect with Mentors</h3>
-                <p>Would you like a mentor callback or program details?</p>
-                <div class="contact-phone">+91 9972140555</div>
-            </div>
+            <a href="https://wa.link/95a1z6" target="_blank" rel="noopener" class="contact-card-link">
+                <div class="contact-card">
+                    <img src="images/whatsapp.png" alt="icon" class="contact-icon">
+                    <h3>Connect with Mentors</h3>
+                    <p>Would you like a mentor callback or program details?</p>
+                    <div class="contact-phone">+91 9972140555</div>
+                </div>
+            </a>
 
-            <div class="contact-card">
-                <img src="images/whatsapp.png" alt="icon" class="contact-icon">
-                <h3>Partner with Us</h3>
-                <p>We collaborate with educators and mentors to make career planning accessible and affordable for every student.</p>
-                <div class="contact-phone">+91 9972140555</div>
-            </div>
+            <a href="https://wa.link/q40e4w" target="_blank" rel="noopener" class="contact-card-link">
+                    <div class="contact-card">
+                    <img src="images/whatsapp.png" alt="icon" class="contact-icon">
+                    <h3>Partner with Us</h3>
+                    <p>We collaborate with educators and mentors to make career planning accessible and affordable for every student.</p>
+                    <div class="contact-phone">+91 9972140555</div>
+                </div>
+            </a>
 
         </div>
     </section>
@@ -1791,7 +1831,10 @@ the right age”</div>
         .contact-sub{ color:#606a75; margin-bottom:20px; max-width:420px; }
         .contact-cta{ width:fit-content; }
 
-        .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; align-items:center; min-height:240px }
+        .contact-card-link{ text-decoration:none; color:inherit; display:block; transition: transform 0.3s ease; }
+        .contact-card-link:hover{ transform: translateY(-6px); }
+        .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; align-items:center; min-height:240px; transition: box-shadow 0.3s ease; }
+        .contact-card-link:hover .contact-card{ box-shadow: 0 32px 80px rgba(15,23,42,0.12); }
         .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; }
         .contact-card h3{ margin:12px 0 6px 0; font-size:20px }
         .contact-card p{ color:#6b7280; font-size:14px; margin:0 0 10px; }
@@ -1810,9 +1853,9 @@ the right age”</div>
                 </div>
                 <p class="footer-desc">At Pursue Academia, we are on a mission to make career planning structured, accessible, and stress free for students and parents.</p>
                 <div class="social-icons">
-                    <a class="social-link" href="#" aria-label="facebook"><img src="images/fb.png" alt="facebook" style="width: auto;height: 5rem;"></a>
-                    <a class="social-link" href="#" aria-label="instagram"><img src="images/ig.png" alt="instagram" style="width: auto;height: 5rem;"></a>
-                    <a class="social-link" href="#" aria-label="youtube"><img src="images/yt.png" alt="youtube" style="width: auto;height: 5rem;"></a>
+                    <a class="social-link" href="https://www.facebook.com/profile.php?id=100093386288604" aria-label="facebook"><img src="images/fb.png" alt="facebook" style="width: auto;height: 5rem;"></a>
+                    <a class="social-link" href="https://www.instagram.com/my_supernotes" aria-label="instagram"><img src="images/ig.png" alt="instagram" style="width: auto;height: 5rem;"></a>
+                    <!-- <a class="social-link" href="#" aria-label="youtube"><img src="images/yt.png" alt="youtube" style="width: auto;height: 5rem;"></a> -->
                 </div>
             </div>
 
@@ -2007,6 +2050,22 @@ the right age”</div>
         })();
     </script>
     <script>
+        // Mobile toolkit video play button
+        (function(){
+            const mobileVideo = document.getElementById('mobileToolkitVideo');
+            const mobilePlayBtn = document.getElementById('mobilePlayButton');
+            
+            if(mobilePlayBtn && mobileVideo){
+                mobilePlayBtn.addEventListener('click', ()=>{
+                    if(mobileVideo.paused) mobileVideo.play(); else mobileVideo.pause();
+                });
+                
+                mobileVideo.addEventListener('play', ()=>{ mobilePlayBtn.style.display='none'; });
+                mobileVideo.addEventListener('pause', ()=>{ mobilePlayBtn.style.display='flex'; });
+            }
+        })();
+    </script>
+    <script>
         // Navbar behaviors: Home -> reload without hash; Courses/Services -> scroll then remove hash
         (function(){
             const homeLink = document.querySelector('nav a[href="#home"]');
@@ -2113,6 +2172,401 @@ the right age”</div>
                 setTimeout(function(){ try{ window.scrollTo(0,0); }catch(e){} }, 50);
             }
         })();
+    </script>
+
+    <!-- Popup Form HTML -->
+    <div id="customPopupOverlay" aria-hidden="true">
+      <div id="customPopupBox" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+        <button id="closePopup" aria-label="Close popup">&times;</button>
+
+        <h2 id="popupTitle" style="text-align:center;margin:0 0 12px;font-size:22px;">Fill Your Details</h2>
+
+        <form id="studentForm" class="customForm" autocomplete="on">
+          <label for="name">Name <span style="color:#ff0000">*</span></label>
+          <input id="name" type="text" placeholder="Enter your full name" required>
+
+          <label for="whatsapp">WhatsApp No. <span style="color:#ff0000">*</span></label>
+          <input id="whatsapp" type="text" maxlength="10" placeholder="Enter 10-digit number" required>
+
+          <label for="email">Email <span style="color:#ff0000">*</span></label>
+          <input id="email" type="email" placeholder="Enter your email address" required>
+
+          <label for="refcode">Reference Code</label>
+          <input id="refcode" type="text" placeholder="Enter reference code (optional)">
+
+          <h3 style="margin-top:14px;">Student Information</h3>
+          <label for="studentName">Student Name <span style="color:#ff0000">*</span></label>
+          <input id="studentName" type="text" placeholder="Enter student's full name" required>
+
+          <label for="studentGrade">Grade/Class <span style="color:#ff0000">*</span></label>
+          <input id="studentGrade" type="text" placeholder="Enter student's grade/class" required>
+
+          <h3 style="margin-top:14px;">Address</h3>
+          <label for="street">Street Address <span style="color:#ff0000">*</span></label>
+          <input id="street" type="text" placeholder="Enter your street address" required>
+
+          <label for="pincode">Pincode <span style="color:#ff0000">*</span></label>
+          <input id="pincode" type="text" maxlength="6" placeholder="Enter 6-digit pincode" required>
+          <div id="pincodeError" style="color:red;font-size:12px;margin-top:4px;"></div>
+
+          <label for="city">City <span style="color:#ff0000">*</span></label>
+          <input id="city" type="text" placeholder="Auto-filled from pincode" readonly required>
+
+          <label for="state">State <span style="color:#ff0000">*</span></label>
+          <input id="state" type="text" placeholder="Auto-filled from pincode" readonly required>
+
+          <label for="country">Country <span style="color:#ff0000">*</span></label>
+          <input id="country" type="text" placeholder="Auto-filled from pincode" readonly required>
+
+          <button type="submit">Submit</button>
+        </form>
+
+      </div>
+    </div>
+
+    <div id="loader">Loading... please wait</div>
+
+    <script>
+    /* POPUP FORM SCRIPT */
+    (function(){
+      // defensive: don't run twice
+      if (window.__customPopupInit) return;
+      window.__customPopupInit = true;
+
+      document.addEventListener('DOMContentLoaded', function(){
+
+        const overlay = document.getElementById('customPopupOverlay');
+        const box = document.getElementById('customPopupBox');
+        const closeBtn = document.getElementById('closePopup');
+        const loader = document.getElementById('loader');
+
+        if (!overlay || !box) {
+          console.warn('Popup: missing #customPopupOverlay or #customPopupBox');
+          return;
+        }
+
+        // open popup helper
+        function openPopup(){
+          overlay.style.display = 'flex';
+          overlay.setAttribute('aria-hidden','false');
+          document.body.style.overflow = 'hidden';
+          if (loader) loader.style.display = 'none';
+          // focus first input for accessibility
+          const firstInput = box.querySelector('input, button, textarea, select');
+          if (firstInput) firstInput.focus();
+          console.info('Popup opened');
+        }
+
+        // close helper
+        function closePopup(){
+          overlay.style.display = 'none';
+          overlay.setAttribute('aria-hidden','true');
+          document.body.style.overflow = '';
+          console.info('Popup closed');
+        }
+
+        // safe attach: remove hrefs on openPopup anchors to avoid navigation
+        document.querySelectorAll('.openPopup a').forEach(a => a.removeAttribute('href'));
+
+        // attach unified listener (works for existing and later-inserted elements)
+        function onTrigger(e){
+          // support both click and touchend
+          try { e.preventDefault(); } catch(e){}
+          openPopup();
+        }
+
+        // attach to existing triggers
+        const triggers = Array.from(document.querySelectorAll('.openPopup'));
+        if (triggers.length === 0) {
+          console.info('Popup: no .openPopup triggers found (will still work if triggered programmatically).');
+        } else {
+          triggers.forEach(t => {
+            // ensure pointer-events allowed
+            t.style.pointerEvents = 'auto';
+            // avoid double-listening by using a symbol property
+            if (!t.__popupHandlerAttached) {
+              t.addEventListener('click', onTrigger);
+              t.addEventListener('touchend', onTrigger, {passive:false});
+              t.__popupHandlerAttached = true;
+            }
+          });
+        }
+
+        // close interactions
+        if (closeBtn) closeBtn.addEventListener('click', closePopup);
+        overlay.addEventListener('click', function(e){
+          if (e.target === overlay) closePopup();
+        });
+        // prevent clicks inside box from bubbling
+        box.addEventListener('click', function(e){ e.stopPropagation(); });
+
+        // ESC key
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape' && overlay.style.display === 'flex') closePopup();
+        });
+
+        // REAL-TIME FORM VALIDATIONS
+        const nameInput = document.getElementById('name');
+        const whatsappInput = document.getElementById('whatsapp');
+        const emailInput = document.getElementById('email');
+        const studentNameInput = document.getElementById('studentName');
+        const pincodeInput = document.getElementById('pincode');
+        const cityInput = document.getElementById('city');
+        const stateInput = document.getElementById('state');
+        const countryInput = document.getElementById('country');
+        const pincodeError = document.getElementById('pincodeError');
+
+        // Helper to show error message
+        function showError(input, message) {
+          let errorDiv = input.nextElementSibling;
+          if (!errorDiv || !errorDiv.classList.contains('validation-error')) {
+            errorDiv = document.createElement('div');
+            errorDiv.className = 'validation-error';
+            errorDiv.style.cssText = 'color:red;font-size:12px;margin-top:4px;';
+            input.parentNode.insertBefore(errorDiv, input.nextSibling);
+          }
+          errorDiv.textContent = message;
+          input.style.borderColor = message ? '#ff0000' : '';
+        }
+
+        function clearError(input) {
+          const errorDiv = input.nextElementSibling;
+          if (errorDiv && errorDiv.classList.contains('validation-error')) {
+            errorDiv.textContent = '';
+          }
+          input.style.borderColor = '';
+        }
+
+        // Name validation: no numbers
+        if (nameInput) {
+          nameInput.addEventListener('input', function(){
+            const value = this.value;
+            if (/\d/.test(value)) {
+              showError(this, 'Name should not contain numbers');
+            } else if (value.trim().length > 0 && value.trim().length < 2) {
+              showError(this, 'Name must be at least 2 characters');
+            } else {
+              clearError(this);
+            }
+          });
+        }
+
+        // Student name validation: no numbers
+        if (studentNameInput) {
+          studentNameInput.addEventListener('input', function(){
+            const value = this.value;
+            if (/\d/.test(value)) {
+              showError(this, 'Name should not contain numbers');
+            } else if (value.trim().length > 0 && value.trim().length < 2) {
+              showError(this, 'Name must be at least 2 characters');
+            } else {
+              clearError(this);
+            }
+          });
+        }
+
+        // WhatsApp validation: numbers only, 10 digits
+        if (whatsappInput) {
+          whatsappInput.addEventListener('input', function(){
+            // Remove non-digits
+            this.value = this.value.replace(/\D/g, '');
+            const value = this.value;
+            
+            if (value.length > 0 && value.length < 10) {
+              showError(this, 'Phone number must be 10 digits');
+            } else if (value.length === 10 && !/^[6-9]\d{9}$/.test(value)) {
+              showError(this, 'Please enter a valid Indian mobile number');
+            } else if (value.length === 10) {
+              clearError(this);
+            } else {
+              clearError(this);
+            }
+          });
+        }
+
+        // Email validation: real-time format check
+        if (emailInput) {
+          emailInput.addEventListener('input', function(){
+            const value = this.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (value.length > 0 && !emailRegex.test(value)) {
+              showError(this, 'Please enter a valid email address');
+            } else {
+              clearError(this);
+            }
+          });
+        }
+
+        // Pincode validation: numbers only, 6 digits
+        if (pincodeInput) {
+          pincodeInput.addEventListener('input', function(){
+            // Remove non-digits
+            this.value = this.value.replace(/\D/g, '');
+          });
+        }
+
+        // PINCODE autofill (if element exists)
+
+        if (pincodeInput) {
+          pincodeInput.addEventListener('blur', async function(){
+            const pin = (pincodeInput.value || '').trim();
+            const regex = /^[1-9][0-9]{5}$/;
+            if (!regex.test(pin)) {
+              if (pincodeError) pincodeError.textContent = 'Please enter a valid 6-digit Indian pincode.';
+              if (cityInput) cityInput.value=''; if (stateInput) stateInput.value=''; if (countryInput) countryInput.value='';
+              return;
+            }
+            if (pincodeError) pincodeError.textContent = 'Checking...';
+            try {
+              const res = await fetch('https://api.postalpincode.in/pincode/' + encodeURIComponent(pin));
+              const data = await res.json();
+              if (!data || !data[0] || data[0].Status !== 'Success') {
+                if (pincodeError) pincodeError.textContent = 'Please check the pincode and try again.';
+                return;
+              }
+              const po = data[0].PostOffice && data[0].PostOffice[0];
+              if (po) {
+                if (cityInput) cityInput.value = po.District || '';
+                if (stateInput) stateInput.value = po.State || '';
+                if (countryInput) countryInput.value = po.Country || '';
+                if (pincodeError) pincodeError.textContent = '';
+              } else {
+                if (pincodeError) pincodeError.textContent = 'No post office data found.';
+              }
+            } catch(err){
+              if (pincodeError) pincodeError.textContent = 'Error validating pincode. Try again.';
+            }
+          });
+        }
+
+        // Form submit handler with Shiprocket + Google Sheets integration
+        const form = document.getElementById('studentForm');
+        if (form) {
+          form.addEventListener('submit', function(e){
+            e.preventDefault();
+            console.log('FORM SUBMITTED — Processing data');
+
+            // Validate required fields
+            const required = ['name','email','whatsapp','street','city','state','pincode','studentName','studentGrade'];
+            for (const id of required){
+              const el = document.getElementById(id);
+              if (!el || !el.value || !el.value.trim()) {
+                alert('Please fill all mandatory fields.');
+                return;
+              }
+            }
+
+            // Show loader
+            if (loader) { loader.style.display = 'flex'; }
+
+            // Collect form field values
+            const name = document.getElementById('name')?.value.trim() || '';
+            const phone = document.getElementById('whatsapp')?.value.trim() || '';
+            const email = document.getElementById('email')?.value.trim() || '';
+            const refcode = document.getElementById('refcode')?.value.trim() || '';
+            const street = document.getElementById('street')?.value.trim() || '';
+            const city = document.getElementById('city')?.value.trim() || '';
+            const state = document.getElementById('state')?.value.trim() || '';
+            const pincode = document.getElementById('pincode')?.value.trim() || '';
+            const country = document.getElementById('country')?.value.trim() || '';
+            const studentName = document.getElementById('studentName')?.value.trim() || '';
+            const studentGrade = document.getElementById('studentGrade')?.value.trim() || '';
+
+            // Prepare Shiprocket payload
+            const orderPayload = {
+              order_id: 'REG' + Date.now(),
+              order_date: new Date().toISOString(),
+              pickup_location: 'home-1',
+
+              billing_customer_name: name,
+              billing_last_name: '',
+              billing_address: street,
+              billing_address_2: '',
+              billing_city: city,
+              billing_pincode: pincode,
+              billing_state: state,
+              billing_country: country,
+              billing_email: email,
+              billing_phone: phone,
+
+              shipping_is_billing: true,
+
+              order_items: [
+                {
+                  name: 'Career Planning Toolkit',
+                  sku: 'CPT001',
+                  units: 1,
+                  selling_price: 0,
+                  discount: 0,
+                  tax: 0,
+                  hsn: ''
+                }
+              ],
+
+              payment_method: 'prepaid',
+              sub_total: 0,
+              length: 14.8,
+              breadth: 2.5,
+              height: 21,
+              weight: 0.3
+            };
+
+            console.log('Sending payload:', orderPayload);
+
+            // 1) Submit to Shiprocket backend
+            fetch('https://supernotes.onrender.com/api/shiprocket/create', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(orderPayload)
+            })
+            .then(async (res) => {
+              let data = {};
+              try { data = await res.json(); } catch (e) {}
+              console.log('Shiprocket API Response:', data);
+            })
+            .catch(err => console.error('Shiprocket Error:', err));
+
+            // 2) Submit to Google Sheets
+            const sheetData = {
+              name,
+              phone,
+              email,
+              refcode,
+              street,
+              pincode,
+              city,
+              state,
+              country,
+              studentName,
+              studentGrade,
+              lpname: 'Supernotes Revamp'
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbzw24YUBlv8LoZYsbaP0IGfYfcgdoEdvcwvtxcpo5vnWOPKlQB0noIQSg62GxDJ__MC/exec', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(sheetData)
+            });
+
+            // Redirect after 1 second
+            setTimeout(function(){
+              form.reset();
+              if (loader) loader.style.display = 'none';
+              closePopup();
+              window.location.href = 'https://www.supernotes.info/';
+            }, 1000);
+          });
+        }
+
+        // expose openPopup to window for manual triggers (safe)
+        window.openCustomPopup = openPopup;
+        window.closeCustomPopup = closePopup;
+
+        console.info('Custom popup initialized.');
+      });
+    })();
     </script>
 </body>
 </html>
