@@ -1249,6 +1249,7 @@
           justify-content:center;
           transition:all 0.3s ease;
           font-weight:300;
+          -webkit-tap-highlight-color: transparent;
         }
 
         #closePopup:hover{
@@ -1259,6 +1260,10 @@
         }
 
         #closePopup:focus{
+          outline:none;
+        }
+        
+        #closePopup:focus-visible{
           outline:2px solid #ff6b35;
           outline-offset:2px;
         }
