@@ -370,7 +370,7 @@
 }
 
         .video-container {
-            width: 57%;
+            width: 100%;
     position: relative;
     background: #eaeef6;
     border-radius: 20px;
@@ -384,7 +384,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .play-button {
@@ -1426,8 +1426,8 @@
             <!-- Video Section -->
             <div class="toolkit-video">
                 <div class="video-container">
-                    <!-- Replace with your actual video -->
-                    <video id="toolkitVideo" controls src="images/notebook.mp4" poster="images/notebook.jpg"></video>
+                    <!-- Single promo video (same as mobile) -->
+                    <video id="toolkitVideo" controls src="https://empower.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="images/promo.jpg"></video>
                     <div class="play-button" id="toolkitPlayButton"></div>
                 </div>
             </div>
@@ -1445,10 +1445,7 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
-                    <div class="video-container toolkit-item-video">
-                        <video controls src="images/notebook.mp4" poster="images/notebook.jpg"></video>
-                        <div class="play-button"></div>
-                    </div>
+                    
                 </div>
 
                 <div class="toolkit-item" data-video="images/ebook.mp4" data-poster="images/ebook.jpg">
@@ -1461,10 +1458,7 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
-                    <div class="video-container toolkit-item-video">
-                        <video controls src="images/ebook.mp4" poster="images/ebook.jpg"></video>
-                        <div class="play-button"></div>
-                    </div>
+                    
                 </div>
 
                 <div class="toolkit-item" data-video="images/mentor.mp4" data-poster="images/mentor.jpg">
@@ -1477,10 +1471,7 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
-                    <div class="video-container toolkit-item-video">
-                        <video controls src="images/mentor.mp4" poster="images/mentor.jpg"></video>
-                        <div class="play-button"></div>
-                    </div>
+                    
                 </div>
 
                 <div class="toolkit-item" data-video="images/tap.mp4" data-poster="images/tap.jpg">
@@ -1493,10 +1484,7 @@
                         </div>
                         <div class="toolkit-arrow-wrap"><img src="images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
                     </div>
-                    <div class="video-container toolkit-item-video">
-                        <video controls src="images/tap.mp4" poster="images/tap.jpg"></video>
-                        <div class="play-button"></div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -1960,15 +1948,7 @@ the right age”</div>
                         if(!isActive){
                             it.classList.add('active');
                             btn.setAttribute('aria-expanded','true');
-                            const src = it.dataset.video;
-                            const poster = it.dataset.poster;
-                            if(src){
-                                // swap video source
-                                try{ video.pause(); }catch(e){}
-                                video.src = src;
-                                if(poster) video.poster = poster;
-                                video.load();
-                            }
+                            // Desktop now uses a single promo video — do not swap sources here.
                         }
                     });
                 });
@@ -1989,15 +1969,7 @@ the right age”</div>
                     const btn = first.querySelector('.toolkit-item-title');
                     first.classList.add('active');
                     if(btn) btn.setAttribute('aria-expanded','true');
-                    // set video to first item's video
-                    const src = first.dataset.video;
-                    const poster = first.dataset.poster;
-                    if(src){
-                        try{ video.pause(); }catch(e){}
-                        video.src = src;
-                        if(poster) video.poster = poster;
-                        video.load();
-                    }
+                    // Keep the single promo video unchanged for desktop
                 }
             }
         })();
@@ -2565,13 +2537,68 @@ the right age”</div>
           });
         }
 
-        // expose openPopup to window for manual triggers (safe)
-        window.openCustomPopup = openPopup;
-        window.closeCustomPopup = closePopup;
+                // expose openPopup to window for manual triggers (safe)
+                window.openCustomPopup = openPopup;
+                window.closeCustomPopup = closePopup;
 
-        console.info('Custom popup initialized.');
-      });
-    })();
-    </script>
+                console.info('Custom popup initialized.');
+            });
+        })();
+        </script>
+
+        <!-- Contact form: posts to local Node.js backend at http://localhost:3000/send-email -->
+        <section style="max-width:760px;margin:32px auto;padding:16px;border-top:1px solid #eee;">
+            <h2>Contact Support</h2>
+            <form id="contactFormLocal">
+                <label>Name
+                    <input type="text" name="name" required />
+                </label>
+                <label>Your email (optional)
+                    <input type="email" name="email" />
+                </label>
+                <label>Message
+                    <textarea name="message" rows="6" required></textarea>
+                </label>
+                <button type="submit">Send via email</button>
+            </form>
+            <div id="contactLocalStatus" style="margin-top:12px;color:#333"></div>
+            <script>
+                (function(){
+                    const form = document.getElementById('contactFormLocal');
+                    const status = document.getElementById('contactLocalStatus');
+
+                    form.addEventListener('submit', async function(e){
+                        e.preventDefault();
+                        const data = {
+                            name: form.name.value.trim(),
+                            email: form.email.value.trim(),
+                            message: form.message.value.trim()
+                        };
+
+                        status.textContent = 'Sending...';
+
+                        try {
+                            const res = await fetch('http://localhost:3000/send-email', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(data)
+                            });
+
+                            const j = await res.json().catch(() => ({}));
+
+                            if (res.ok) {
+                                status.textContent = 'Message sent — thank you.';
+                                form.reset();
+                            } else {
+                                status.textContent = 'Error: ' + (j.error || res.statusText);
+                            }
+                        } catch (err) {
+                            status.textContent = 'Network error: ' + (err && err.message ? err.message : String(err));
+                        }
+                    });
+                })();
+            </script>
+        </section>
+
 </body>
 </html>
