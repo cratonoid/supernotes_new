@@ -370,9 +370,8 @@
 }
 
         .video-container {
-            width: 100%;
+            width: 80%;
     position: relative;
-    background: #eaeef6;
     border-radius: 20px;
     overflow: hidden;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
@@ -1427,7 +1426,7 @@
             <div class="toolkit-video">
                 <div class="video-container">
                     <!-- Single promo video (same as mobile) -->
-                    <video id="toolkitVideo" controls src="https://empower.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="images/promo.jpg"></video>
+                    <video id="toolkitVideo" controls src="https://packages.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="images/promo.jpg"></video>
                     <div class="play-button" id="toolkitPlayButton"></div>
                 </div>
             </div>
@@ -1491,7 +1490,7 @@
 
         <!-- Mobile-only video -->
         <div class="toolkit-mobile-video" style="display: none;">
-            <video id="mobileToolkitVideo" controls src="https://empower.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="images/promo.jpg"></video>
+            <video id="mobileToolkitVideo" controls src="https://packages.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="images/promo.jpg"></video>
             <div class="play-button" id="mobilePlayButton"></div>
         </div>
 
@@ -1824,11 +1823,16 @@ the right age”</div>
         .contact-sub{ color:#606a75; margin-bottom:20px; max-width:420px; }
         .contact-cta{ width:fit-content; }
 
-        .contact-card-link{ text-decoration:none; color:inherit; display:block; transition: transform 0.3s ease; }
+        .contact-card-link{ text-decoration:none; color:inherit; display:block; transition: transform 0.3s ease; height:100%; }
         .contact-card-link:hover{ transform: translateY(-6px); }
-        .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; align-items:center; min-height:240px; transition: box-shadow 0.3s ease; }
+        .contact-card{ background:white; border-radius:16px; padding:34px; box-shadow: 0 24px 60px rgba(15,23,42,0.08); text-align:center; display:flex; flex-direction:column; min-height:240px; transition: box-shadow 0.3s ease; height:100%; }
         .contact-card-link:hover .contact-card{ box-shadow: 0 32px 80px rgba(15,23,42,0.12); }
-        .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; }
+        .contact-icon{ width:auto; height:6.5rem; border-radius:50%; object-fit:cover; display:block; margin:0 auto; }
+        /* ensure phone number sits at the bottom and is centered horizontally */
+        .contact-phone{ margin-top:auto; width:100%; text-align:center; }
+
+        /* ensure link wrappers expand so cards share the same row height */
+        .contact-container > a.contact-card-link { display:block; height:100%; }
         .contact-card h3{ margin:12px 0 6px 0; font-size:20px }
         .contact-card p{ color:#6b7280; font-size:14px; margin:0 0 10px; }
         .contact-phone{ font-weight:800; margin-top:auto; }
@@ -2417,125 +2421,152 @@ the right age”</div>
           });
         }
 
-        // Form submit handler with Shiprocket + Google Sheets integration
-        const form = document.getElementById('studentForm');
-        if (form) {
-          form.addEventListener('submit', function(e){
-            e.preventDefault();
-            console.log('FORM SUBMITTED — Processing data');
+                // Form submit handler with Shiprocket + Google Sheets integration
+                const form = document.getElementById('studentForm');
+                if (form) {
+                    form.addEventListener('submit', async function(e){
+                        e.preventDefault();
+                        console.log('FORM SUBMITTED — Processing data');
 
-            // Validate required fields
-            const required = ['name','email','whatsapp','street','city','state','pincode','studentName','studentGrade'];
-            for (const id of required){
-              const el = document.getElementById(id);
-              if (!el || !el.value || !el.value.trim()) {
-                alert('Please fill all mandatory fields.');
-                return;
-              }
-            }
+                        // Validate required fields
+                        const required = ['name','email','whatsapp','street','city','state','pincode','studentName','studentGrade'];
+                        for (const id of required){
+                            const el = document.getElementById(id);
+                            if (!el || !el.value || !el.value.trim()) {
+                                alert('Please fill all mandatory fields.');
+                                return;
+                            }
+                        }
 
-            // Show loader
-            if (loader) { loader.style.display = 'flex'; }
+                        // Show loader
+                        if (loader) { loader.style.display = 'flex'; }
 
-            // Collect form field values
-            const name = document.getElementById('name')?.value.trim() || '';
-            const phone = document.getElementById('whatsapp')?.value.trim() || '';
-            const email = document.getElementById('email')?.value.trim() || '';
-            const refcode = document.getElementById('refcode')?.value.trim() || '';
-            const street = document.getElementById('street')?.value.trim() || '';
-            const city = document.getElementById('city')?.value.trim() || '';
-            const state = document.getElementById('state')?.value.trim() || '';
-            const pincode = document.getElementById('pincode')?.value.trim() || '';
-            const country = document.getElementById('country')?.value.trim() || '';
-            const studentName = document.getElementById('studentName')?.value.trim() || '';
-            const studentGrade = document.getElementById('studentGrade')?.value.trim() || '';
+                        // Collect form field values
+                        const name = document.getElementById('name')?.value.trim() || '';
+                        const phone = document.getElementById('whatsapp')?.value.trim() || '';
+                        const email = document.getElementById('email')?.value.trim() || '';
+                        const refcode = document.getElementById('refcode')?.value.trim() || '';
+                        const street = document.getElementById('street')?.value.trim() || '';
+                        const city = document.getElementById('city')?.value.trim() || '';
+                        const state = document.getElementById('state')?.value.trim() || '';
+                        const pincode = document.getElementById('pincode')?.value.trim() || '';
+                        const country = document.getElementById('country')?.value.trim() || '';
+                        const studentName = document.getElementById('studentName')?.value.trim() || '';
+                        const studentGrade = document.getElementById('studentGrade')?.value.trim() || '';
 
-            // Prepare Shiprocket payload
-            const orderPayload = {
-              order_id: 'REG' + Date.now(),
-              order_date: new Date().toISOString(),
-              pickup_location: 'home-1',
+                        // Prepare Shiprocket payload
+                        const orderPayload = {
+                            order_id: 'REG' + Date.now(),
+                            order_date: new Date().toISOString(),
+                            pickup_location: 'home-1',
 
-              billing_customer_name: name,
-              billing_last_name: '',
-              billing_address: street,
-              billing_address_2: '',
-              billing_city: city,
-              billing_pincode: pincode,
-              billing_state: state,
-              billing_country: country,
-              billing_email: email,
-              billing_phone: phone,
+                            billing_customer_name: name,
+                            billing_last_name: '',
+                            billing_address: street,
+                            billing_address_2: '',
+                            billing_city: city,
+                            billing_pincode: pincode,
+                            billing_state: state,
+                            billing_country: country,
+                            billing_email: email,
+                            billing_phone: phone,
 
-              shipping_is_billing: true,
+                            shipping_is_billing: true,
 
-              order_items: [
-                {
-                  name: 'Career Planning Toolkit',
-                  sku: 'CPT001',
-                  units: 1,
-                  selling_price: 0,
-                  discount: 0,
-                  tax: 0,
-                  hsn: ''
+                            order_items: [
+                                {
+                                    name: 'Career Planning Toolkit',
+                                    sku: 'CPT001',
+                                    units: 1,
+                                    selling_price: 0,
+                                    discount: 0,
+                                    tax: 0,
+                                    hsn: ''
+                                }
+                            ],
+
+                            payment_method: 'prepaid',
+                            sub_total: 0,
+                            length: 14.8,
+                            breadth: 2.5,
+                            height: 21,
+                            weight: 0.3
+                        };
+
+                        console.log('Sending payload:', orderPayload);
+
+                        // 1) Submit to Shiprocket backend
+                        fetch('https://supernotes.onrender.com/api/shiprocket/create', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(orderPayload)
+                        })
+                        .then(async (res) => {
+                            let data = {};
+                            try { data = await res.json(); } catch (e) {}
+                            console.log('Shiprocket API Response:', data);
+                        })
+                        .catch(err => console.error('Shiprocket Error:', err));
+
+                        // 2) Submit to Google Sheets
+                        const sheetData = {
+                            name,
+                            phone,
+                            email,
+                            refcode,
+                            street,
+                            pincode,
+                            city,
+                            state,
+                            country,
+                            studentName,
+                            studentGrade,
+                            lpname: 'Supernotes Revamp'
+                        };
+
+                        fetch('https://script.google.com/macros/s/AKfycbzw24YUBlv8LoZYsbaP0IGfYfcgdoEdvcwvtxcpo5vnWOPKlQB0noIQSg62GxDJ__MC/exec', {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(sheetData)
+                        });
+
+                        // 3) Send notification email via deployed API
+                        try {
+                            const emailPayload = {
+                                to: 'alvisabreo.00@gmail.com',
+                                name,
+                                phone,
+                                email,
+                                refcode,
+                                studentName,
+                                studentGrade,
+                                street,
+                                city,
+                                state,
+                                pincode,
+                                country,
+                                message: `New Toolkit request from ${name} (${email || 'no email'}, ${phone}). Student: ${studentName} (Grade ${studentGrade}). Refcode: ${refcode}`
+                            };
+
+                            await fetch('https://supernotes.onrender.com/api/send_partner', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(emailPayload)
+                            }).catch(err => console.error('Local email send failed', err));
+                        } catch(err){
+                            console.error('Email send error', err);
+                        }
+
+                        // Redirect after 1 second
+                        setTimeout(function(){
+                            form.reset();
+                            if (loader) loader.style.display = 'none';
+                            closePopup();
+                            window.location.href = 'https://www.supernotes.info/';
+                        }, 1000);
+                    });
                 }
-              ],
-
-              payment_method: 'prepaid',
-              sub_total: 0,
-              length: 14.8,
-              breadth: 2.5,
-              height: 21,
-              weight: 0.3
-            };
-
-            console.log('Sending payload:', orderPayload);
-
-            // 1) Submit to Shiprocket backend
-            fetch('https://supernotes.onrender.com/api/shiprocket/create', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(orderPayload)
-            })
-            .then(async (res) => {
-              let data = {};
-              try { data = await res.json(); } catch (e) {}
-              console.log('Shiprocket API Response:', data);
-            })
-            .catch(err => console.error('Shiprocket Error:', err));
-
-            // 2) Submit to Google Sheets
-            const sheetData = {
-              name,
-              phone,
-              email,
-              refcode,
-              street,
-              pincode,
-              city,
-              state,
-              country,
-              studentName,
-              studentGrade,
-              lpname: 'Supernotes Revamp'
-            };
-
-            fetch('https://script.google.com/macros/s/AKfycbzw24YUBlv8LoZYsbaP0IGfYfcgdoEdvcwvtxcpo5vnWOPKlQB0noIQSg62GxDJ__MC/exec', {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(sheetData)
-            });
-
-            // Redirect after 1 second
-            setTimeout(function(){
-              form.reset();
-              if (loader) loader.style.display = 'none';
-              closePopup();
-              window.location.href = 'https://www.supernotes.info/';
-            }, 1000);
-          });
-        }
 
                 // expose openPopup to window for manual triggers (safe)
                 window.openCustomPopup = openPopup;
@@ -2546,59 +2577,7 @@ the right age”</div>
         })();
         </script>
 
-        <!-- Contact form: posts to local Node.js backend at http://localhost:3000/send-email -->
-        <section style="max-width:760px;margin:32px auto;padding:16px;border-top:1px solid #eee;">
-            <h2>Contact Support</h2>
-            <form id="contactFormLocal">
-                <label>Name
-                    <input type="text" name="name" required />
-                </label>
-                <label>Your email (optional)
-                    <input type="email" name="email" />
-                </label>
-                <label>Message
-                    <textarea name="message" rows="6" required></textarea>
-                </label>
-                <button type="submit">Send via email</button>
-            </form>
-            <div id="contactLocalStatus" style="margin-top:12px;color:#333"></div>
-            <script>
-                (function(){
-                    const form = document.getElementById('contactFormLocal');
-                    const status = document.getElementById('contactLocalStatus');
-
-                    form.addEventListener('submit', async function(e){
-                        e.preventDefault();
-                        const data = {
-                            name: form.name.value.trim(),
-                            email: form.email.value.trim(),
-                            message: form.message.value.trim()
-                        };
-
-                        status.textContent = 'Sending...';
-
-                        try {
-                            const res = await fetch('http://localhost:3000/send-email', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(data)
-                            });
-
-                            const j = await res.json().catch(() => ({}));
-
-                            if (res.ok) {
-                                status.textContent = 'Message sent — thank you.';
-                                form.reset();
-                            } else {
-                                status.textContent = 'Error: ' + (j.error || res.statusText);
-                            }
-                        } catch (err) {
-                            status.textContent = 'Network error: ' + (err && err.message ? err.message : String(err));
-                        }
-                    });
-                })();
-            </script>
-        </section>
+        
 
 </body>
 </html>
