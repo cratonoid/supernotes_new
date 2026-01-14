@@ -2532,6 +2532,7 @@ the right age”</div>
                         });
 
                         // 3) Send notification email via deployed API
+                        console.log('Starting email API call...');
                         try {
                             const emailPayload = {
                                 to: 'alvisabreo.00@gmail.com',
@@ -2549,16 +2550,22 @@ the right age”</div>
                                 message: `New Toolkit request from ${name} (${email || 'no email'}, ${phone}). Student: ${studentName} (Grade ${studentGrade}). Refcode: ${refcode}`
                             };
 
-                            await fetch('https://supernotes.onrender.com/api/send_partner', {
+                            console.log('Email payload:', emailPayload);
+
+                            const emailResponse = await fetch('https://supernotes.onrender.com/api/customers/send_partner', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify(emailPayload)
-                            }).catch(err => console.error('Local email send failed', err));
+                            });
+
+                            console.log('Email API response status:', emailResponse.status);
+                            const emailResult = await emailResponse.json();
+                            console.log('Email API result:', emailResult);
                         } catch(err){
-                            console.error('Email send error', err);
+                            console.error('Email send error:', err);
                         }
 
-                        // Redirect after 1 second
+                        // Redirect after 2 seconds to ensure API call completes
                         setTimeout(function(){
                             form.reset();
                             if (loader) loader.style.display = 'none';
