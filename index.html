@@ -516,6 +516,56 @@
     margin-top: 50px;
 }
 
+        /* User request: hide side titles/descriptions and make promo video look better
+           Apply only on desktop so mobile layout is unchanged */
+        @media (min-width: 769px) {
+            .toolkit-section .toolkit-features,
+            .toolkit-section .toolkit-cta,
+            .toolkit-section .toolkit-mobile-video {
+                display: none !important;
+            }
+
+            .toolkit-section {
+                padding: 0 !important;
+                background: #F2F6FF !important;
+            }
+
+      
+
+            .toolkit-section .toolkit-video {
+                position: relative !important;
+                top: auto !important;
+                max-width: none !important;
+                width: 100% !important;
+                align-self: stretch !important;
+                padding: 24px 0 !important;
+                display: flex !important;
+                justify-content: center !important;
+            }
+
+            .toolkit-section .video-container {
+                width: 80% !important;
+                position: relative !important;
+                padding-bottom: 45% !important; /* reduced height */
+                border-radius: 20px !important;
+                overflow: hidden !important;
+                margin: 24px auto !important;
+                box-shadow: 0 14px 40px rgba(15,23,42,0.08) !important;
+                background: #000 !important;
+            }
+
+            .toolkit-section .video-container video,
+            .toolkit-section .video-container iframe {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain !important;
+                background: #000 !important;
+            }
+        }
+
 @media (max-width: 768px) {
     .toolkit-content {
         flex-direction: column;
