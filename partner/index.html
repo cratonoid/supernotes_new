@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supernotes – Partner</title>
+    <script>
+        if ('scrollRestoration' in history) {
+            try { history.scrollRestoration = 'manual'; } catch (e) { /* ignore */ }
+        }
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        html { scroll-behavior: smooth; }
+
+        /* ── Header ─────────────────────────────────────────── */
+        header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 18px 4rem;
+            background: transparent;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+        }
+
+        .logo { height: 28px; }
+        .logo img { height: 100%; width: auto; }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            justify-self: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .get-in-touch {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255,107,53,0.18);
+            transition: transform 160ms ease, box-shadow 160ms ease;
+            text-decoration: none;
+        }
+        header > .get-in-touch { justify-self: end; }
+        .get-in-touch:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(255,107,53,0.22);
+        }
+        .get-in-touch:focus {
+            outline: 3px solid rgba(255,107,53,0.18);
+            outline-offset: 3px;
+        }
+
+        /* ── Hero ──────────────────────────────────────────── */
+        .hero {
+            margin-left: 1.5rem;
+            margin-right: -0.4rem;
+            position: relative;
+            padding: 30px 80px;
+            min-height: 640px;
+            background-image: url('../images/banner-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+        }
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 60px;
+        }
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-left-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .hero-left-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        .cta-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cta-btn:hover { transform: translateY(-2px); }
+        .btn-arrow {
+            height: 23px;
+            width: auto;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .hero-right {
+            flex: 1.2;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+        }
+        .hero-right-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 20px;
+        }
+        .hero-right-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* ── Star Runner ────────────────────────────────────── */
+        .star-runner {
+            background: white;
+            padding: 36px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .star-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+        .star-track img { height: 27px; margin: 0 7px; }
+        @keyframes scroll {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ── Toolkit Section ────────────────────────────────── */
+        .toolkit-section {
+            padding: 7px 80px;
+            background: #F2F6FF;
+        }
+        .toolkit-header { text-align: center; }
+        .toolkit-badge { display: inline-block; }
+        .toolkit-badge img { height: 70px; }
+        .toolkit-title {
+            margin-bottom: 0.2rem;
+            margin-top: -1.5rem;
+            font-size: 42px;
+        }
+        .toolkit-title .orange-text { color: #ff6b35; font-style: italic; }
+        .toolkit-subtitle {
+            color: #666;
+            font-size: 16px;
+            max-width: 60%;
+            margin: 0 auto;
+        }
+        .toolkit-content {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .toolkit-video {
+            justify-items: end;
+            flex: 1;
+            max-width: 720px;
+            position: sticky;
+            top: 120px;
+            align-self: flex-center;
+        }
+        .video-container {
+            width: 80%;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            padding-bottom: 56.25%;
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: auto;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; height: 100px;
+            background: #525252;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            box-shadow: 0 14px 36px rgba(255,107,53,0.18);
+        }
+        .play-button::after {
+            content: '▶';
+            color: white;
+            font-size: 36px;
+            margin-left: 5px;
+        }
+        .toolkit-features { flex: 1; }
+        .toolkit-item-video { display: none; }
+        .toolkit-item {
+            padding: 10px 0;
+            position: relative;
+        }
+        .toolkit-item::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background: #d8dbe6;
+            width: 80%;
+            margin-top: 28px;
+            opacity: 0.9;
+        }
+        .toolkit-item-title {
+            font-size: 2.2rem;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: transparent;
+            border: none;
+            text-align: left;
+            padding: 6px 0;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+            color: #0f1720;
+        }
+        .toolkit-arrow-wrap { display: flex; justify-content: flex-end; }
+        .toolkit-arrow { height: 4rem; width: auto; transition: none; }
+        .toolkit-body {
+            margin-right: 13rem;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0;
+        }
+        .toolkit-item-description { flex: 1 1 auto; }
+        .toolkit-item.active .toolkit-body {
+            margin-right: 13rem;
+            max-height: 400px;
+            padding-top: 15px;
+        }
+        .toolkit-cta {
+            margin-bottom: 2rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Desktop: full-width video, hide accordion */
+        @media (min-width: 769px) {
+            .toolkit-section .toolkit-features,
+            .toolkit-section .toolkit-mobile-video {
+                display: none !important;
+            }
+            .toolkit-section { padding: 0 !important; background: #F2F6FF !important; }
+            .toolkit-section .toolkit-video {
+                position: relative !important;
+                top: auto !important;
+                max-width: none !important;
+                width: 100% !important;
+                align-self: stretch !important;
+                padding: 24px 0 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .toolkit-section .video-container {
+                width: 80% !important;
+                position: relative !important;
+                padding-bottom: 45% !important;
+                border-radius: 20px !important;
+                overflow: hidden !important;
+                margin: 24px auto !important;
+                box-shadow: 0 14px 40px rgba(15,23,42,0.08) !important;
+                background: #000 !important;
+            }
+            .toolkit-section .video-container video,
+            .toolkit-section .video-container iframe {
+                position: absolute !important;
+                top: 0 !important; left: 0 !important;
+                width: 100% !important; height: 100% !important;
+                object-fit: contain !important;
+                background: #000 !important;
+            }
+        }
+
+        /* ── Choosing Section ───────────────────────────────── */
+        .choosing-section {
+            padding: 20px 125px;
+            background: white;
+        }
+        .choosing-container {
+            justify-content: center;
+            display: flex;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            align-items: center;
+        }
+        .choosing-left { max-width: 38%; flex: 1; }
+        .choosing-image {
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 520px;
+            border-radius: 20px;
+            display: block;
+            box-shadow: 0 12px 40px rgba(15,23,42,0.08);
+        }
+        .choosing-right { max-width: 44%; flex: 1; padding-left: 20px; }
+        .choosing-list { display: flex; flex-direction: column; gap: 20px; }
+        .choosing-item {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            background: transparent;
+        }
+        .choosing-icon {
+            width: 62px; height: 62px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .choosing-icon img { width: auto; height: 10rem; }
+        .choosing-text h4 { margin: 0 0 6px 0; font-size: 18px; }
+        .choosing-text p { margin: 0; color: #666; font-size: 14px; }
+
+        /* ── Testimonials ───────────────────────────────────── */
+        .testimonials-section { padding: 20px 80px; }
+        .testimonials-track-wrap {
+            position: relative;
+            margin-top: 40px;
+        }
+        .testimonials-track {
+            margin-left: -5.5rem;
+            margin-right: -5.5rem;
+            padding-top: 1.5rem;
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            overflow-y: visible;
+            flex-wrap: nowrap;
+            padding-bottom: 4rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .testimonials-track::-webkit-scrollbar { display: none; }
+        .testimonial-card {
+            flex: 0 0 28rem;
+            background: white;
+            padding: 36px;
+            border-radius: 18px;
+            box-shadow: 0 18px 50px rgba(15,23,42,0.08);
+            scroll-snap-align: start;
+            position: relative;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+        .testimonial-card .stars { font-size: 1.5rem; color: #ff7b24; margin-bottom: 18px; }
+        .testimonial-text { flex: 1 1 auto; margin-bottom: 18px; line-height: 1.7; color: #333; }
+        .testimonial-meta { display: flex; align-items: center; justify-content: space-between; }
+        .testimonial-author { display: flex; gap: 12px; align-items: center; }
+        .author-logo {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: #ff6b35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 18px;
+        }
+        .testimonials-controls {
+            position: absolute;
+            right: 0rem; bottom: 0rem;
+            display: flex; gap: 12px;
+        }
+        .testimonials-controls button {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: white;
+            cursor: pointer;
+        }
+
+        /* ── Footer ─────────────────────────────────────────── */
+        .site-footer { background: #f3f4f6; padding: 48px 80px 24px; color: #333; }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1fr 1fr;
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto 18px;
+            align-items: start;
+        }
+        .footer-col h4 { margin: 0 0 12px; font-size: 18px; color: #111; }
+        .footer-desc { color: #6b7280; max-width: 360px; margin: 8px 0 18px; text-align: left; }
+        .footer-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+        .footer-list a { color: #6b7280; text-decoration: none; }
+        .footer-col { justify-items: left; }
+        .social-icons { display: flex; gap: 14px; }
+        .social-link {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .footer-bottom { border-top: 1px solid rgba(0,0,0,0.08); padding-top: 18px; text-align: center; }
+        .copyright { color: #9aa0a6; }
+
+        /* ── Menu button ─────────────────────────────────────── */
+        .menu-button { display: none; flex-direction: column; gap: 6px; }
+        .menu-button .bar { display: block; width: 28px; height: 3px; background: #111; margin: 0; border-radius: 2px; transition: transform 200ms ease, opacity 200ms ease; }
+        .get-in-touch-mobile { display: none; }
+
+        /* ── Popup ───────────────────────────────────────────── */
+        @media(max-width:767px){ #customPopupOverlay{ height:100dvh !important; } }
+        #customPopupOverlay {
+            display: none;
+            position: fixed !important;
+            inset: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(4px);
+            padding: 16px;
+            box-sizing: border-box;
+            z-index: 2147483646;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        #customPopupBox {
+            width: 100%; max-width: 700px;
+            background: #fff;
+            border-radius: 12px;
+            border: 2px solid #000;
+            padding: 32px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.3), 0 15px 40px rgba(0,0,0,0.22), 0 5px 15px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+            position: relative;
+            margin: auto;
+            transform: none !important;
+            z-index: 2147483647;
+            font-family: Poppins, sans-serif;
+        }
+        #closePopup {
+            position: absolute; right: 16px; top: 16px;
+            width: 36px; height: 36px;
+            font-size: 28px; line-height: 1;
+            border: 2px solid #333; border-radius: 50%;
+            background: #fff; cursor: pointer; color: #333;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #closePopup:hover { background: #333; color: #fff; transform: rotate(90deg); border-color: #000; }
+        #closePopup:focus { outline: none; }
+        #closePopup:focus-visible { outline: 2px solid #ff6b35; outline-offset: 2px; }
+        .customForm label { display: block; margin-top: 10px; font-weight: 600; font-size: 14px; }
+        .customForm input, .customForm textarea {
+            width: 100%; padding: 10px; margin-top: 6px;
+            border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box;
+        }
+        .customForm button { width: 100%; padding: 12px; margin-top: 16px; border-radius: 8px; border: 0; background: #ff6b35; color: #fff; font-weight: 600; cursor: pointer; font-size: 15px; transition: background 0.2s; }
+        .customForm button:hover { background: #e85a24; }
+        .pl-error { color: #dc2626; font-size: 12px; margin-top: 4px; min-height: 16px; }
+        #loader {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(255,255,255,0.9);
+            z-index: 2147483648;
+            justify-content: center; align-items: center;
+            font-size: 20px; font-weight: 600;
+        }
+
+        /* ── Mobile responsive ───────────────────────────────── */
+        @media (max-width: 768px) {
+            /* Header */
+            header {
+                display: flex;
+                justify-content: space-between;
+                padding: 14px 18px;
+                position: fixed;
+                top: 0; left: 0; right: 0;
+                background: rgba(255,255,255,0.95);
+                z-index: 9999;
+            }
+            body { padding-top: 60px; }
+            nav { gap: 14px; }
+            .menu-button { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: transparent; border: none; padding: 6px; gap: 6px; cursor: pointer; margin-left: auto; }
+            nav.mobile-hidden { display: none; }
+            nav.mobile-open {
+                position: absolute;
+                top: 60px; right: 12px; left: auto;
+                width: 220px;
+                background: white;
+                border-radius: 10px;
+                padding: 10px;
+                display: flex; flex-direction: column; gap: 8px;
+                box-shadow: 0 10px 30px rgba(16,24,40,0.12);
+                z-index: 9998;
+                text-align: left;
+            }
+            nav.mobile-open a { display: block; width: 100%; padding: 12px 10px; border-radius: 8px; color: #111; text-decoration: none; }
+            nav.mobile-open a:hover { background: rgba(16,24,40,0.04); }
+            .get-in-touch { display: none; }
+            .get-in-touch-mobile {
+                display: block;
+                background: #ff6b35;
+                color: #fff !important;
+                padding: 10px 14px;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 8px 20px rgba(255,107,53,0.14);
+            }
+
+            /* Hero */
+            .hero {
+                margin-left: 0 !important; margin-right: 0 !important;
+                padding: 1rem; min-height: auto;
+                background-position: top center;
+            }
+            .hero-container { flex-direction: column; padding: 0; gap: 30px; }
+            .hero-left-image, .hero-right-image { max-width: 100%; }
+
+            /* Toolkit */
+            .toolkit-section { padding: 40px 20px; }
+            .toolkit-header { padding: 0 16px; margin-bottom: 30px; }
+            .toolkit-title br { display: none; }
+            .toolkit-title { line-height: 1.3; font-size: 2.1rem !important; text-align: center; }
+            .toolkit-subtitle { color: #666; font-size: 16px; max-width: 100% !important; margin-bottom: 20px; }
+            .toolkit-content { display: none !important; }
+            .toolkit-mobile-video {
+                display: block !important;
+                position: relative;
+                width: 100%; max-width: 600px;
+                margin: 0 auto 30px;
+                background: transparent;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+            .toolkit-mobile-video video { width: 100%; height: auto; display: block; border-radius: 20px; }
+            .toolkit-mobile-video .play-button {
+                position: absolute; top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                width: 80px; height: 80px;
+                background: rgba(82,82,82,0.9);
+                border-radius: 50%;
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer; z-index: 10;
+                box-shadow: 0 14px 36px rgba(0,0,0,0.3);
+                transition: all 0.3s ease;
+            }
+            .toolkit-mobile-video .play-button:hover { background: rgba(82,82,82,1); transform: translate(-50%,-50%) scale(1.1); }
+            .toolkit-mobile-video .play-button::after { content: '▶'; color: white; font-size: 28px; margin-left: 5px; }
+            .toolkit-cta { text-align: center; display: block !important; }
+            .toolkit-mobile-cta { display: block !important; }
+
+            /* Choosing */
+            .choosing-section { padding: 20px 16px; }
+            .choosing-container { flex-direction: column; gap: 24px; }
+            .choosing-left, .choosing-right { max-width: 100% !important; width: 100%; }
+            .choosing-right { padding-left: 0; }
+            .choosing-image { max-width: 100%; }
+
+            /* Testimonials */
+            .testimonials-section { padding: 20px 16px; }
+            .testimonials-track { margin-left: 0 !important; margin-right: 0 !important; padding-left: 16px; }
+            .testimonial-card { flex: 0 0 85%; }
+
+            /* Footer */
+            .footer-top { grid-template-columns: 1fr; text-align: left; }
+            .footer-desc { max-width: 100%; color: #6b7280; }
+            .site-footer { padding: 28px 20px; }
+        }
+
+        @media (max-width: 900px) {
+            .choosing-container { flex-direction: column; align-items: center; }
+            .choosing-right { padding-left: 0; }
+            .choosing-image { max-width: 100%; }
+            .testimonial-card { flex: 0 0 85%; }
+            .testimonials-controls { bottom: 0rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ─────────────────────────────────────────────── -->
+    <header>
+        <div class="logo">
+            <img src="../images/logo.png" alt="Supernotes logo">
+        </div>
+        <button class="menu-button" aria-label="Toggle menu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav id="main-nav" class="mobile-hidden">
+            <a href="#home">Home</a>
+            <a href="#toolkit">4 in 1</a>
+            <a href="#testimonials">Testimonials</a>
+            <a class="get-in-touch get-in-touch-mobile" href="https://wa.link/ad0vun">Get in touch</a>
+        </nav>
+        <a class="get-in-touch" href="https://wa.link/ad0vun">Get in touch</a>
+    </header>
+
+    <!-- ── Hero Section ──────────────────────────────────────── -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-left">
+                <div class="hero-left-image">
+                    <img src="../images/mb1.png" alt="Hero Left">
+                </div>
+                <a class="cta-btn openPopup" href="javascript:void(0)">
+                    Get Supernotes Complimentary
+                    <img src="../images/arrow.png" alt="arrow" class="btn-arrow">
+                </a>
+            </div>
+            <div class="hero-right">
+                <div class="hero-right-image">
+                    <img src="../images/mb2.png" alt="Hero Right">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Star Runner ──────────────────────────────────────── -->
+    <section class="star-runner">
+        <div class="star-track">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <!-- Duplicate for seamless loop -->
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+            <img src="../images/supernotes-star.png" alt="Star">
+        </div>
+    </section>
+
+    <!-- ── 4-in-1 Tool Kit Section ─────────────────────────── -->
+    <section id="toolkit" class="toolkit-section">
+        <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="../images/discount.png" alt="">
+            </div>
+            <h2 class="toolkit-title">
+                Why do we call it 4-1 one<br>
+                tool kit – <span class="orange-text">What's included</span>
+            </h2>
+        </div>
+
+        <div class="toolkit-content">
+            <div class="toolkit-video">
+                <div class="video-container">
+                    <video id="toolkitVideo" controls src="https://packages.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="../images/promo.jpg"></video>
+                    <div class="play-button" id="toolkitPlayButton"></div>
+                </div>
+                <div class="toolkit-cta">
+                    <a class="cta-btn openPopup" href="javascript:void(0)">
+                        Get Supernotes Complimentary
+                        <img src="../images/arrow.png" alt="arrow" class="btn-arrow">
+                    </a>
+                </div>
+            </div>
+
+            <div class="toolkit-features" id="toolkitFeatures">
+                <div class="toolkit-item" data-video="../images/notebook.mp4" data-poster="../images/notebook.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>160 Pages Notebook</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Swap out any regular class notebook with Supernotes, so your child gets introduced to
+                            career planning essentials and explores career options across various fields while taking notes.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="../images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="toolkit-item" data-video="../images/ebook.mp4" data-poster="../images/ebook.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Gain Insights E-Book</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Parents and students can read the E-Book for valuable insights on career choices, study abroad options, and essential steps to guide students towards the right path.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="../images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="toolkit-item" data-video="../images/mentor.mp4" data-poster="../images/mentor.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Connect with a Mentor</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Tap or Scan to connect with an expert mentor who will walk you through career planning tools, profile building activities, and strategies to boost admission chances at reputed universities.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="../images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="toolkit-item" data-video="../images/tap.mp4" data-poster="../images/tap.jpg">
+                    <button class="toolkit-item-title" aria-expanded="false">
+                        <span>Access to Resources</span>
+                    </button>
+                    <div class="toolkit-body">
+                        <div class="toolkit-item-description">
+                            Swap out any regular class notebook with Supernotes, so your child gets introduced to career planning essentials and explores career options across various fields while taking notes.
+                        </div>
+                        <div class="toolkit-arrow-wrap"><img src="../images/arrow-tilt.png" alt="arrow" class="toolkit-arrow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile-only video -->
+        <div class="toolkit-mobile-video" style="display:none;">
+            <video id="mobileToolkitVideo" controls src="https://packages.supernotes.info/wp-content/uploads/2026/01/V4-Book-Promo.mp4" poster="../images/promo.jpg"></video>
+            <div class="play-button" id="mobilePlayButton"></div>
+        </div>
+
+        <!-- Mobile-only CTA -->
+        <div class="toolkit-cta toolkit-mobile-cta" style="display:none;">
+            <a class="cta-btn openPopup" href="javascript:void(0)">
+                Get Supernotes Complimentary
+                <img src="../images/arrow.png" alt="arrow" class="btn-arrow">
+            </a>
+        </div>
+
+    </section>
+
+    <!-- ── Choosing the Wrong Career Section ──────────────── -->
+    <section class="choosing-section">
+        <div class="choosing-container">
+            <div class="choosing-left">
+                <div class="toolkit-header choosing-header" style="text-align:start; line-height:normal;">
+                    <h2 class="toolkit-title">Choosing the wrong <br><span class="orange-text">Career is costly</span></h2>
+                    <p>Many parents worry about their child's future, but the lack of structured career planning can lead to:</p>
+                </div>
+                <img src="../images/working.png" alt="student working" class="choosing-image">
+            </div>
+
+            <div class="choosing-right">
+                <div class="choosing-list">
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="../images/c1.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Anxiety &amp; Uncertainty</h4>
+                            <p>Not knowing how to help your child choose the right career.</p>
+                        </div>
+                    </div>
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="../images/c2.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Wasted Time &amp; Resources</h4>
+                            <p>Studying for a career that doesn't match their strengths.</p>
+                        </div>
+                    </div>
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="../images/c3.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Limited Financial Growth</h4>
+                            <p>Choosing an outdated or low-demand field.</p>
+                        </div>
+                    </div>
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="../images/c4.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>Emotional Frustration</h4>
+                            <p>Being stuck in an unfulfilling career impacts confidence.</p>
+                        </div>
+                    </div>
+                    <div class="choosing-item">
+                        <div class="choosing-icon"><img src="../images/c5.png" alt="icon"></div>
+                        <div class="choosing-text">
+                            <h4>A Lifetime of 'What Ifs'</h4>
+                            <p>Regret over missed opportunities and unexplored careers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="toolkit-cta">
+            <a class="cta-btn openPopup" href="javascript:void(0)">
+                Get Supernotes Complimentary
+                <img src="../images/arrow.png" alt="arrow" class="btn-arrow">
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Testimonials Section ───────────────────────────── -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="toolkit-header">
+            <div class="toolkit-badge">
+                <img src="../images/testimonial.png" alt="">
+            </div>
+            <h2 class="toolkit-title">
+                What parents say about <span class="orange-text">Supernotes</span>
+            </h2>
+            <p class="toolkit-subtitle">
+                Explore the incredible advantages of enrolling in our courses and enhancing your skills for the ultimate career success.
+            </p>
+        </div>
+        <div class="container">
+            <div class="testimonials-track-wrap">
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <div class="testimonial-card" data-color="#ffb59a">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">"This is exactly what students need—something practical, accessible, and age-appropriate. Supernotes has filled a big gap in early career awareness."</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Devika Jain</div>
+                                    <div style="color:#777; font-size:0.9rem">Career Mentor</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">D</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card" data-color="#bfa0ff">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">"As a school counselor, I recommend Supernotes to every parent. It helps start the right conversations at the right age."</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Shreyas</div>
+                                    <div style="color:#777; font-size:0.9rem">School Counselor</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">S</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card" data-color="#7ee3b3">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">"The walkthrough sessions made everything clear for me. I finally understood how to choose subjects, explore careers, and plan my next steps."</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Preetam</div>
+                                    <div style="color:#777; font-size:0.9rem">Grade 9 Student</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">P</div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card" data-color="#ffd6a5">
+                        <div class="stars">★★★★★</div>
+                        <div class="testimonial-text">"As a parent, I felt relieved after the walkthrough sessions. They helped my child understand options early and taught us what to focus on in each grade."</div>
+                        <div class="testimonial-meta">
+                            <div class="testimonial-author">
+                                <div>
+                                    <div style="font-weight:700">Rohan Mehta</div>
+                                    <div style="color:#777; font-size:0.9rem">Parent</div>
+                                </div>
+                            </div>
+                            <div class="author-logo">R</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonials-controls">
+                    <button id="testPrev" aria-label="Previous">‹</button>
+                    <button id="testNext" aria-label="Next">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-col footer-brand">
+                <div class="footer-logo">
+                    <img src="../images/logo.png" alt="Supernotes logo" style="height:36px">
+                </div>
+                <p class="footer-desc">At Pursue Academia, we are on a mission to make career planning structured, accessible, and stress free for students and parents.</p>
+                <div class="social-icons">
+                    <a class="social-link" href="https://www.facebook.com/profile.php?id=100093386288604" aria-label="facebook"><img src="../images/fb.png" alt="facebook" style="width:auto;height:5rem;"></a>
+                    <a class="social-link" href="https://www.instagram.com/my_supernotes" aria-label="instagram"><img src="../images/ig.png" alt="instagram" style="width:auto;height:5rem;"></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigate</h4>
+                <ul class="footer-list">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#toolkit">4 in 1</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col"></div>
+            <div class="footer-col"></div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">Copyrights @ Supernotes</div>
+        </div>
+    </footer>
+
+    <!-- ── Popup Form ─────────────────────────────────────── -->
+    <div id="customPopupOverlay" aria-hidden="true">
+        <div id="customPopupBox" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+            <button id="closePopup" aria-label="Close popup">&times;</button>
+            <h2 id="popupTitle" style="text-align:center;margin:0 0 6px;font-size:22px;">Get in Touch</h2>
+            <p style="text-align:center;color:#666;font-size:14px;margin:0 0 20px;">Fill in your details and we'll reach out to you.</p>
+
+            <form id="partnerLeadForm" class="customForm" autocomplete="on" novalidate>
+
+                <label for="pl-name">Name of Parent <span style="color:#ff0000">*</span></label>
+                <input id="pl-name" type="text" placeholder="Enter parent's full name" autocomplete="name" required>
+                <div class="pl-error" id="pl-name-err"></div>
+
+                <label for="pl-student-name" style="margin-top:16px;">Student Name <span style="color:#ff0000">*</span></label>
+                <input id="pl-student-name" type="text" placeholder="Enter student's full name" autocomplete="off" required>
+                <div class="pl-error" id="pl-student-name-err"></div>
+
+                <label for="pl-grade" style="margin-top:16px;">Grade <span style="color:#ff0000">*</span></label>
+                <input id="pl-grade" type="text" placeholder="e.g. 9th, 10th, 11th, 12th" autocomplete="off" required>
+                <div class="pl-error" id="pl-grade-err"></div>
+
+                <label for="pl-phone" style="margin-top:16px;">WhatsApp No. <span style="color:#ff0000">*</span></label>
+                <input id="pl-phone" type="tel" maxlength="10" placeholder="Enter 10-digit WhatsApp number" autocomplete="tel" required>
+                <div class="pl-error" id="pl-phone-err"></div>
+
+                <label for="pl-email" style="margin-top:16px;">Email <span style="color:#ff0000">*</span></label>
+                <input id="pl-email" type="email" placeholder="Enter your email address" autocomplete="email" required>
+                <div class="pl-error" id="pl-email-err"></div>
+
+                <button type="submit" style="margin-top:24px;">Submit</button>
+
+                <p id="pl-success" style="display:none;text-align:center;color:#22c55e;font-weight:600;margin-top:14px;">Thank you! We'll be in touch soon.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ── Scripts ────────────────────────────────────────── -->
+    <script>
+        /* Toolkit video accordion */
+        (function(){
+            const video = document.getElementById('toolkitVideo');
+            const playBtn = document.getElementById('toolkitPlayButton');
+            const items = document.querySelectorAll('#toolkitFeatures .toolkit-item');
+            const isMobile = window.innerWidth <= 768;
+
+            function closeAll(){
+                items.forEach(it=>{
+                    it.classList.remove('active');
+                    const btn = it.querySelector('.toolkit-item-title');
+                    if(btn) btn.setAttribute('aria-expanded','false');
+                });
+            }
+
+            if(isMobile){
+                items.forEach(it=>{
+                    it.classList.add('active');
+                    const btn = it.querySelector('.toolkit-item-title');
+                    if(btn) btn.setAttribute('aria-expanded','true');
+                });
+            } else {
+                items.forEach(it=>{
+                    const btn = it.querySelector('.toolkit-item-title');
+                    btn.addEventListener('click', ()=>{
+                        const isActive = it.classList.contains('active');
+                        closeAll();
+                        if(!isActive){
+                            it.classList.add('active');
+                            btn.setAttribute('aria-expanded','true');
+                        }
+                    });
+                });
+
+                if(playBtn){
+                    playBtn.addEventListener('click', ()=>{
+                        if(video.paused) video.play(); else video.pause();
+                    });
+                }
+                if(video){
+                    video.addEventListener('play', ()=>{ if(playBtn) playBtn.style.display='none'; });
+                    video.addEventListener('pause', ()=>{ if(playBtn) playBtn.style.display='flex'; });
+                }
+
+                if(items.length>0){
+                    items[0].classList.add('active');
+                    const btn = items[0].querySelector('.toolkit-item-title');
+                    if(btn) btn.setAttribute('aria-expanded','true');
+                }
+            }
+        })();
+    </script>
+
+    <script>
+        /* Mobile toolkit video */
+        (function(){
+            const mobileVideo = document.getElementById('mobileToolkitVideo');
+            const mobilePlayBtn = document.getElementById('mobilePlayButton');
+            if(mobilePlayBtn && mobileVideo){
+                mobilePlayBtn.addEventListener('click', ()=>{
+                    if(mobileVideo.paused) mobileVideo.play(); else mobileVideo.pause();
+                });
+                mobileVideo.addEventListener('play', ()=>{ mobilePlayBtn.style.display='none'; });
+                mobileVideo.addEventListener('pause', ()=>{ mobilePlayBtn.style.display='flex'; });
+            }
+        })();
+    </script>
+
+    <script>
+        /* Testimonials scroller */
+        (function(){
+            const track = document.getElementById('testimonialsTrack');
+            const prev = document.getElementById('testPrev');
+            const next = document.getElementById('testNext');
+            if(!track) return;
+
+            const cardWidth = () => track.querySelector('.testimonial-card')?.getBoundingClientRect().width || 560;
+
+            next.addEventListener('click', ()=>{ track.scrollBy({ left: Math.round(cardWidth()+30), behavior:'smooth' }); });
+            prev.addEventListener('click', ()=>{ track.scrollBy({ left: -Math.round(cardWidth()+30), behavior:'smooth' }); });
+
+            track.tabIndex = 0;
+            track.addEventListener('keydown', (e)=>{
+                if(e.key === 'ArrowRight') next.click();
+                if(e.key === 'ArrowLeft') prev.click();
+            });
+
+            const stringToHsl = (str)=>{
+                let hash = 0;
+                for(let i=0;i<str.length;i++) hash = str.charCodeAt(i) + ((hash<<5)-hash);
+                return `hsl(${Math.abs(hash)%360} 70% 45%)`;
+            };
+
+            track.querySelectorAll('.testimonial-card').forEach(card=>{
+                const logo = card.querySelector('.author-logo');
+                if(!logo) return;
+                const color = card.dataset.color;
+                if(color) logo.style.background = color;
+                else {
+                    const nameEl = card.querySelector('.testimonial-author div div');
+                    const name = nameEl ? nameEl.textContent.trim() : '';
+                    logo.style.background = stringToHsl(name || 'anon');
+                }
+                if(!logo.textContent.trim()){
+                    const nameEl = card.querySelector('.testimonial-author div div');
+                    const name = nameEl ? nameEl.textContent.trim() : '';
+                    logo.textContent = (name && name[0]) ? name[0].toUpperCase() : '?';
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        /* Mobile menu toggle */
+        (function(){
+            const btn = document.querySelector('.menu-button');
+            const nav = document.getElementById('main-nav');
+            if(!btn || !nav) return;
+
+            function setOpen(open){
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if(open){
+                    nav.classList.remove('mobile-hidden');
+                    nav.classList.add('mobile-open');
+                } else {
+                    nav.classList.remove('mobile-open');
+                    nav.classList.add('mobile-hidden');
+                }
+            }
+
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                setOpen(btn.getAttribute('aria-expanded') !== 'true');
+            });
+
+            document.addEventListener('click', function(e){
+                if(!nav.classList.contains('mobile-open')) return;
+                if(!nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+            });
+
+            window.addEventListener('resize', function(){
+                if(window.innerWidth > 768){
+                    nav.classList.remove('mobile-hidden','mobile-open');
+                    btn.style.display = 'none';
+                } else {
+                    if(!nav.classList.contains('mobile-open')) nav.classList.add('mobile-hidden');
+                    btn.style.display = '';
+                }
+            });
+
+            if(window.innerWidth <= 768){
+                btn.style.display = '';
+                nav.classList.add('mobile-hidden');
+                btn.setAttribute('aria-expanded','false');
+            } else {
+                btn.style.display = 'none';
+                nav.classList.remove('mobile-hidden','mobile-open');
+            }
+        })();
+    </script>
+
+    <script>
+        /* Partner Lead Form – Popup */
+        (function(){
+            if(window.__partnerPopupInit) return;
+            window.__partnerPopupInit = true;
+
+            // ── Google Sheets endpoint (Apps Script web app URL) ──
+            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxbNGYyVWZUg6_qm-YFhkcbFFURFpb-VhwrNg-X5FpBvpyR3qbLW1lvyUloYp2XbiLbQg/exec';
+
+            // Read UTM parameters from URL once on load
+            const _urlParams     = new URLSearchParams(window.location.search);
+            const UTM_PARTNER    = _urlParams.get('utm_partner')      || '';
+            const UTM_PARTNER_MAIL = _urlParams.get('utm_partner_mail') || '';
+
+            document.addEventListener('DOMContentLoaded', function(){
+                const overlay  = document.getElementById('customPopupOverlay');
+                const box      = document.getElementById('customPopupBox');
+                const closeBtn = document.getElementById('closePopup');
+                if(!overlay || !box) return;
+
+                // ── Open / Close ───────────────────────────────────
+                function openPopup(){
+                    overlay.style.display = 'flex';
+                    overlay.setAttribute('aria-hidden','false');
+                    document.body.style.overflow = 'hidden';
+                    const first = box.querySelector('input');
+                    if(first) first.focus();
+                }
+                function closePopup(){
+                    overlay.style.display = 'none';
+                    overlay.setAttribute('aria-hidden','true');
+                    document.body.style.overflow = '';
+                }
+
+                // Attach to all .openPopup triggers
+                document.querySelectorAll('.openPopup a').forEach(a => a.removeAttribute('href'));
+                Array.from(document.querySelectorAll('.openPopup')).forEach(t=>{
+                    t.style.pointerEvents = 'auto';
+                    if(!t.__plHandlerAttached){
+                        t.addEventListener('click', e=>{ try{e.preventDefault();}catch(_){} openPopup(); });
+                        t.addEventListener('touchend', e=>{ try{e.preventDefault();}catch(_){} openPopup(); }, {passive:false});
+                        t.__plHandlerAttached = true;
+                    }
+                });
+
+                if(closeBtn) closeBtn.addEventListener('click', closePopup);
+                overlay.addEventListener('click', e=>{ if(e.target===overlay) closePopup(); });
+                box.addEventListener('click', e=>e.stopPropagation());
+                document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.style.display==='flex') closePopup(); });
+
+                // ── Validation helpers ──────────────────────────────
+                const REGEXES = {
+                    'name':         /^[a-zA-Z\s]{2,60}$/,                   // letters & spaces only, 2–60 chars
+                    'student-name': /^[a-zA-Z\s]{2,60}$/,                   // letters & spaces only, 2–60 chars
+                    'grade':        /^[a-zA-Z0-9\s]{1,20}$/,                // alphanumeric, 1–20 chars
+                    'phone':        /^[6-9]\d{9}$/,                         // Indian mobile: starts 6-9, 10 digits
+                    'email':        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/         // standard email
+                };
+                const MESSAGES = {
+                    'name':         'Please enter a valid parent name (letters only, min 2 characters).',
+                    'student-name': 'Please enter a valid student name (letters only, min 2 characters).',
+                    'grade':        'Please enter a valid grade (e.g. 9, 10th, 11th).',
+                    'phone':        'Please enter a valid 10-digit WhatsApp number starting with 6–9.',
+                    'email':        'Please enter a valid email address.'
+                };
+
+                function setError(fieldId, msg){
+                    const input = document.getElementById(fieldId);
+                    const err   = document.getElementById(fieldId + '-err');
+                    if(input){
+                        input.style.borderColor = msg ? '#dc2626' : '#ccc';
+                        input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+                    }
+                    if(err) err.textContent = msg || '';
+                }
+                function validateField(fieldId, regex){
+                    const input = document.getElementById(fieldId);
+                    if(!input) return false;
+                    const val = input.value.trim();
+                    if(!val){ setError(fieldId, 'This field is required.'); return false; }
+                    // derive the key: strip leading 'pl-'
+                    const key = fieldId.replace(/^pl-/, '');
+                    if(!regex.test(val)){ setError(fieldId, MESSAGES[key] || 'Invalid value.'); return false; }
+                    setError(fieldId, '');
+                    return true;
+                }
+
+                // Real-time validation
+                const nameEl        = document.getElementById('pl-name');
+                const studentNameEl = document.getElementById('pl-student-name');
+                const gradeEl       = document.getElementById('pl-grade');
+                const phoneEl       = document.getElementById('pl-phone');
+                const emailEl       = document.getElementById('pl-email');
+
+                if(nameEl) nameEl.addEventListener('input', ()=>{
+                    const v = nameEl.value.trim();
+                    if(v.length === 0){ setError('pl-name',''); return; }
+                    setError('pl-name', REGEXES['name'].test(v) ? '' : MESSAGES['name']);
+                });
+                if(studentNameEl) studentNameEl.addEventListener('input', ()=>{
+                    const v = studentNameEl.value.trim();
+                    if(v.length === 0){ setError('pl-student-name',''); return; }
+                    setError('pl-student-name', REGEXES['student-name'].test(v) ? '' : MESSAGES['student-name']);
+                });
+                if(gradeEl) gradeEl.addEventListener('input', ()=>{
+                    const v = gradeEl.value.trim();
+                    if(v.length === 0){ setError('pl-grade',''); return; }
+                    setError('pl-grade', REGEXES['grade'].test(v) ? '' : MESSAGES['grade']);
+                });
+                if(phoneEl) phoneEl.addEventListener('input', ()=>{
+                    phoneEl.value = phoneEl.value.replace(/\D/g,'');  // digits only
+                    const v = phoneEl.value;
+                    if(v.length === 0){ setError('pl-phone',''); return; }
+                    setError('pl-phone', REGEXES['phone'].test(v) ? '' : MESSAGES['phone']);
+                });
+                if(emailEl) emailEl.addEventListener('input', ()=>{
+                    const v = emailEl.value.trim();
+                    if(v.length === 0){ setError('pl-email',''); return; }
+                    setError('pl-email', REGEXES['email'].test(v) ? '' : MESSAGES['email']);
+                });
+
+                // ── Submit ──────────────────────────────────────────
+                const form    = document.getElementById('partnerLeadForm');
+                const success = document.getElementById('pl-success');
+                const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+
+                if(form) form.addEventListener('submit', async function(e){
+                    e.preventDefault();
+
+                    const okName        = validateField('pl-name',         REGEXES['name']);
+                    const okStudentName = validateField('pl-student-name',  REGEXES['student-name']);
+                    const okGrade       = validateField('pl-grade',         REGEXES['grade']);
+                    const okPhone       = validateField('pl-phone',         REGEXES['phone']);
+                    const okEmail       = validateField('pl-email',         REGEXES['email']);
+                    if(!okName || !okStudentName || !okGrade || !okPhone || !okEmail) return;
+
+                    const parentName  = nameEl.value.trim();
+                    const studentName = studentNameEl.value.trim();
+                    const grade       = gradeEl.value.trim();
+                    const whatsappNo  = phoneEl.value.trim();
+                    const email       = emailEl.value.trim();
+
+                    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Submitting…'; }
+
+                    try{
+                        await fetch(SHEET_URL, {
+                            method: 'POST',
+                            mode:   'no-cors',
+                            headers:{ 'Content-Type':'application/json' },
+                            body: JSON.stringify({ name: parentName, studentName, grade, phone: whatsappNo, email, lpname:'Supernotes Partner Page', timestamp: new Date().toISOString(), partner_name: UTM_PARTNER, partner_email: UTM_PARTNER_MAIL })
+                        });
+                    }catch(err){ console.error('Sheet submit error:', err); }
+
+                    // Send notification email via dedicated partner_lead endpoint
+                    try{
+                        const emailPayload = {
+                            to:            UTM_PARTNER_MAIL,
+                            parentName,
+                            studentName,
+                            grade,
+                            whatsappNo,
+                            email,
+                            partner_name:  UTM_PARTNER,
+                            partner_email: UTM_PARTNER_MAIL
+                        };
+                        await fetch('https://supernotes.onrender.com/api/customers/partner_lead', {
+                            method:  'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body:    JSON.stringify(emailPayload)
+                        });
+                    }catch(err){ console.error('Email send error:', err); }
+
+                    // Show success, reset after 2 s then redirect to WhatsApp
+                    if(success) success.style.display = 'block';
+                    if(submitBtn){ submitBtn.style.display = 'none'; }
+                    form.querySelectorAll('input').forEach(i=>{ i.disabled = true; });
+
+                    setTimeout(()=>{
+                        form.reset();
+                        form.querySelectorAll('input').forEach(i=>{ i.disabled = false; i.style.borderColor=''; });
+                        ['pl-name','pl-student-name','pl-grade','pl-phone','pl-email'].forEach(id=>setError(id,''));
+                        if(success) success.style.display = 'none';
+                        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Submit'; submitBtn.style.display = ''; }
+                        closePopup();
+
+                        window.open('https://wa.me/919972140555', '_blank');
+                    }, 2000);
+                });
+
+                window.openCustomPopup  = openPopup;
+                window.closeCustomPopup = closePopup;
+            });
+        })();
+    </script>
+
+</body>
+</html>
