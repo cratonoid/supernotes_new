@@ -1005,7 +1005,7 @@
                 <div class="pl-error" id="pl-grade-err"></div>
 
                 <label for="pl-phone">WhatsApp No. <span style="color:#ff0000">*</span></label>
-                <input id="pl-phone" type="tel" maxlength="10" placeholder="Enter 10-digit WhatsApp number" autocomplete="tel" required>
+                <input id="pl-phone" type="tel" maxlength="16" placeholder="Enter WhatsApp number with country code (e.g. +1 415…)" autocomplete="tel" required>
                 <div class="pl-error" id="pl-phone-err"></div>
 
                 <label for="pl-email">Email <span style="color:#ff0000">*</span></label>
@@ -1237,14 +1237,14 @@
                     'name':         /^[a-zA-Z\s]{2,60}$/,                   // letters & spaces only, 2–60 chars
                     'student-name': /^[a-zA-Z\s]{2,60}$/,                   // letters & spaces only, 2–60 chars
                     'grade':        /^[a-zA-Z0-9\s]{1,20}$/,                // alphanumeric, 1–20 chars
-                    'phone':        /^[6-9]\d{9}$/,                         // Indian mobile: starts 6-9, 10 digits
+                    'phone':        /^\+?[1-9]\d{6,14}$/,                      // international: optional +, 7–15 digits
                     'email':        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/         // standard email
                 };
                 const MESSAGES = {
                     'name':         'Please enter a valid parent name (letters only, min 2 characters).',
                     'student-name': 'Please enter a valid student name (letters only, min 2 characters).',
                     'grade':        'Please enter a valid grade (e.g. 9, 10th, 11th).',
-                    'phone':        'Please enter a valid 10-digit WhatsApp number starting with 6–9.',
+                    'phone':        'Please enter a valid WhatsApp number (7–15 digits, optionally starting with +).',
                     'email':        'Please enter a valid email address.'
                 };
 
@@ -1292,7 +1292,8 @@
                     setError('pl-grade', REGEXES['grade'].test(v) ? '' : MESSAGES['grade']);
                 });
                 if(phoneEl) phoneEl.addEventListener('input', ()=>{
-                    phoneEl.value = phoneEl.value.replace(/\D/g,'');  // digits only
+                    const raw = phoneEl.value;
+                    phoneEl.value = (raw.startsWith('+') ? '+' : '') + raw.replace(/\D/g,'');  // allow leading + for country code
                     const v = phoneEl.value;
                     if(v.length === 0){ setError('pl-phone',''); return; }
                     setError('pl-phone', REGEXES['phone'].test(v) ? '' : MESSAGES['phone']);
@@ -1367,7 +1368,7 @@
                         if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Submit'; submitBtn.style.display = ''; }
                         closePopup();
 
-                        window.open('https://wa.me/919972140555', '_blank');
+                        window.open('https://wa.link/supernotes', '_blank');
                     }, 2000);
                 });
 
